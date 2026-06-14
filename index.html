@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
+    <!-- Fitur Otomatis Agar Bisa Diinstal Jadi Aplikasi di HP (PWA) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Azka Nota">
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Azka%20Stepnosing%20Nota%22,%22short_name%22:%22Azka%20Nota%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22#0f172a%22,%22theme_color%22:%22#0f172a%22}">
+
     <!-- Library Cetak PDF Berkualitas Tinggi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Google Fonts & Font Awesome Icons -->
@@ -207,7 +212,7 @@
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
 
-        /* PERBAIKAN LIVE PREVIEW DI LAYAR HP (MENCEGAH TERPOTONG DI BAWAH) */
+        /* FIX PREVIEW HP: Mengubah overflow menjadi visible agar kalkulasi total tidak terpotong */
         .preview-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -403,7 +408,7 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
+    <!-- Bar Navigasi Atas -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -416,10 +421,10 @@
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD WINDOW -->
+    <!-- HALAMAN DASHBOARD UTAMA -->
     <div class="dashboard-container" id="window-buat">
         
-        <!-- SIDE FORM INPUT (KIRI) -->
+        <!-- BAGIAN INPUT DATA (KIRI) -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title">
                 <i class="fa-solid fa-pen-to-square"></i> Data Invoice / Nota
@@ -444,7 +449,7 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="addNewItemField()"><i class="fa-solid fa-plus"></i> Tambah</button>
                 </div>
 
-                <!-- Container Baris Dinamis Masukan Barang -->
+                <!-- Wadah Input Barang Dinamis -->
                 <div id="dynamic-inputs-container"></div>
 
                 <div class="card-title" style="margin-top:15px; padding-top:10px; font-size:14px;">
@@ -462,11 +467,11 @@
             </div>
         </div>
 
-        <!-- LIVE NOTA PAPER PREVIEW (KANAN) -->
+        <!-- LIVE PREVIEW NOTA KERTAS (KANAN) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-paper" id="actual-pdf-paper">
                 
-                <!-- Header Atas Menggunakan Tabel Murni Agar Struktur Cetak Kokoh -->
+                <!-- Tabel Header Nota -->
                 <table class="nota-header-table">
                     <tr>
                         <td class="logo-box">
@@ -514,11 +519,11 @@
                         </tr>
                     </thead>
                     <tbody id="lbl-nota-rows">
-                        <!-- Baris Otomatis Melalui JavaScript -->
+                        <!-- Otomatis diisi oleh JavaScript -->
                     </tbody>
                 </table>
 
-                <!-- Bagian Bawah Nota Ringkasan & Total Biaya -->
+                <!-- Bagian Bawah Tanda Tangan & Total Biaya -->
                 <table class="nota-footer-table">
                     <tr>
                         <td class="footer-note">
@@ -552,17 +557,17 @@
 
     </div>
 
-    <!-- WINDOW 2: RIWAYAT NOTA -->
+    <!-- HALAMAN RIWAYAT NOTA -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Semua Nota Terbikin</div>
             <div class="history-list" id="history-render-box">
-                <!-- List riwayat nota muncul disini -->
+                <!-- List riwayat muncul di sini -->
             </div>
         </div>
     </div>
 
-    <!-- WINDOW 3: PENGATURAN TOKO -->
+    <!-- HALAMAN PENGATURAN PROFIL TOKO -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 600px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Pengaturan Informasi Profil Toko</div>
