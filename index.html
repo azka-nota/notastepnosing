@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
+    <!-- Library Cetak PDF Berkualitas Tinggi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -39,7 +41,7 @@
             min-height: 100vh;
         }
 
-        /* Navigation Bar */
+        /* Navigation Bar --> Tidak ikut dicetak */
         .navbar {
             background-color: #0f172a;
             color: white;
@@ -221,22 +223,25 @@
             align-items: flex-start;
         }
 
-        /* PERUBAHAN UTAMA: Ukuran Kertas Menggunakan Pixel Mantap Agar Lebar Penuh */
+        /* PERBAIKAN TINGGI MAKSIMAL: Dikunci ke 620px agar pas 1 lembar tanpa bocor */
         .nota-paper {
             width: 1100px;
-            min-height: 720px;
+            height: 620px;
+            max-height: 620px;
             background: #ffffff;
-            padding: 30px 35px;
+            padding: 20px 30px;
             color: #000000;
             position: relative;
             box-sizing: border-box;
+            overflow: hidden;
             page-break-inside: avoid;
+            page-break-after: avoid;
         }
 
         .nota-header-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
 
         .nota-header-table td {
@@ -246,7 +251,8 @@
         }
 
         .logo-box {
-            width: 240px;
+            width: 220px;
+            text-align: center;
         }
 
         .logo-box img {
@@ -254,46 +260,47 @@
             display: block;
         }
 
+        /* Teks slogan diposisikan rapat ke bawah logo */
+        .logo-sub-text {
+            font-size: 10px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 4px;
+            line-height: 1.2;
+            color: #000000;
+            padding-left: 2px;
+        }
+
         .info-box {
             padding-left: 20px;
-            font-size: 14px;
-            line-height: 1.45;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .info-box .headline {
             font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 3px;
-        }
-
-        /* Sub-tulisan di bawah logo seperti gambar asli */
-        .logo-sub-text {
-            font-size: 11px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 5px;
-            line-height: 1.2;
-            color: #000000;
+            font-size: 14px;
+            margin-bottom: 2px;
         }
 
         .customer-box {
-            width: 340px;
+            width: 320px;
             padding-left: 20px;
         }
 
         .meta-entry {
             display: flex;
-            margin-bottom: 7px;
-            font-size: 14px;
+            margin-bottom: 5px;
+            font-size: 13px;
             align-items: flex-end;
         }
 
         .meta-label {
-            width: 80px;
+            width: 75px;
         }
 
         .meta-colon {
-            width: 15px;
+            width: 12px;
         }
 
         .meta-value-line {
@@ -301,31 +308,30 @@
             border-bottom: 1px dotted #000;
             font-weight: bold;
             padding-left: 4px;
-            min-height: 20px;
+            min-height: 18px;
         }
 
-        /* Tabel Utama Nota Transaksi */
+        /* Tabel Utama Nota Transaksi - Dirapatkan sedikit ruang vertikalnya */
         .main-nota-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         .main-nota-table th {
             background: #e2e8f0;
             border: 1px solid #000000;
-            padding: 8px;
+            padding: 6px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
-            letter-spacing: 0.5px;
         }
 
         .main-nota-table td {
             border: 1px solid #000000;
-            padding: 8px;
-            height: 36px;
-            font-size: 14px;
+            padding: 6px;
+            height: 30px;
+            font-size: 13px;
             vertical-align: middle;
         }
 
@@ -336,7 +342,7 @@
         .nota-footer-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .nota-footer-table td {
@@ -348,16 +354,16 @@
         .footer-note {
             width: 40%;
             font-style: italic;
-            font-size: 13px;
-            line-height: 1.4;
-            padding-top: 5px;
+            font-size: 12px;
+            line-height: 1.3;
+            padding-top: 4px;
         }
 
         .footer-sign {
             width: 25%;
             text-align: center;
-            font-size: 14px;
-            padding-top: 5px;
+            font-size: 13px;
+            padding-top: 4px;
         }
 
         .footer-calc {
@@ -371,8 +377,8 @@
 
         .calc-table td {
             border: 1px solid #000000 !important;
-            padding: 6px 12px;
-            font-size: 14px;
+            padding: 5px 10px;
+            font-size: 13px;
             font-weight: bold;
         }
 
@@ -406,6 +412,7 @@
 </head>
 <body>
 
+    <!-- Top Navigation Bar -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -418,8 +425,10 @@
         </div>
     </div>
 
+    <!-- MAIN DASHBOARD WINDOW -->
     <div class="dashboard-container" id="window-buat">
         
+        <!-- SIDE FORM INPUT (KIRI) -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title">
                 <i class="fa-solid fa-pen-to-square"></i> Data Invoice / Nota
@@ -444,6 +453,7 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="addNewItemField()"><i class="fa-solid fa-plus"></i> Tambah</button>
                 </div>
 
+                <!-- Container Baris Dinamis Masukan Barang -->
                 <div id="dynamic-inputs-container"></div>
 
                 <div class="card-title" style="margin-top:15px; padding-top:10px; font-size:14px;">
@@ -461,26 +471,26 @@
             </div>
         </div>
 
+        <!-- LIVE NOTA PAPER PREVIEW (KANAN) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-paper" id="actual-pdf-paper">
                 
+                <!-- Header Atas Menggunakan Tabel Murni Agar Struktur Cetak Kokoh -->
                 <table class="nota-header-table">
                     <tr>
                         <td class="logo-box">
                             <img src="logo.png" alt="Logo Azka Stepnosing" onerror="this.src='https://azka-nota.github.io/azka-nota/logo.png'">
                             <div class="logo-sub-text">
-                                HARGA TERBAIK<br>
-                                HARGA KOMPETITIF<br>
-                                PELAYANAN TERPERCAYA
+                                HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
                         </td>
                         <td class="info-box">
                             <div class="headline">Melayani Penjualan :</div>
                             <div>Granit Lantai & Dinding, Stepnosing Tangga,</div>
                             <div>Custom Potong Granit Dan Lain-lain.</div>
-                            <div style="margin-top: 6px; font-weight: bold;" id="lbl-toko-alamat">Desa Takuti RT. 02,</div>
+                            <div style="margin-top: 4px; font-weight: bold;" id="lbl-toko-alamat">Desa Takuti RT. 02,</div>
                             <div style="font-weight: bold;" id="lbl-toko-kec">Kec. Mataraman, Kab. Banjar</div>
-                            <div style="margin-top: 6px;" id="lbl-toko-wa">0857-5317-6046 | 0816-4978-1767</div>
+                            <div style="margin-top: 4px;" id="lbl-toko-wa">0857-5317-6046 | 0816-4978-1767</div>
                         </td>
                         <td class="customer-box">
                             <div class="meta-entry">
@@ -502,6 +512,7 @@
                     </tr>
                 </table>
 
+                <!-- Tabel Transaksi Utama -->
                 <table class="main-nota-table">
                     <thead>
                         <tr>
@@ -512,16 +523,18 @@
                         </tr>
                     </thead>
                     <tbody id="lbl-nota-rows">
-                        </tbody>
+                        <!-- Baris Otomatis Melalui JavaScript -->
+                    </tbody>
                 </table>
 
+                <!-- Bagian Bawah Nota Ringkasan & Total Biaya -->
                 <table class="nota-footer-table">
                     <tr>
                         <td class="footer-note">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
                         </td>
                         <td class="footer-sign">
-                            Hormat Kami,<br><br><br><br>
+                            Hormat Kami,<br><br><br>
                             <div style="font-weight:bold;">( .................................... )</div>
                         </td>
                         <td class="footer-calc">
@@ -548,14 +561,17 @@
 
     </div>
 
+    <!-- WINDOW 2: RIWAYAT NOTA -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Semua Nota Terbikin</div>
             <div class="history-list" id="history-render-box">
-                </div>
+                <!-- List riwayat nota muncul disini -->
+            </div>
         </div>
     </div>
 
+    <!-- WINDOW 3: PENGATURAN TOKO -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 600px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Pengaturan Informasi Profil Toko</div>
@@ -729,8 +745,8 @@
             tbody.appendChild(tr);
         });
 
-        // Tetap menggunakan minimal 7 baris kosong agar nota terlihat profesional
-        const minLines = 7;
+        // Dioptimalkan menjadi 6 baris agar tingginya pas presisi di resolusi baru
+        const minLines = 6;
         if(dynamicItems.length < minLines) {
             for(let i = dynamicItems.length; i < minLines; i++) {
                 const dummyTr = document.createElement('tr');
@@ -779,29 +795,27 @@
         const wrapper = document.getElementById('preview-outer-wrapper');
         const paper = document.getElementById('actual-pdf-paper');
 
-        // Sembunyikan pembungkus aplikasi agar tidak ada sisa margin hitam/abu-abu
         navbar.style.display = 'none';
         sidebar.style.display = 'none';
         wrapper.style.padding = '0';
         wrapper.style.background = '#ffffff';
 
-        // PENYETELAN STRUKTUR BARU: Memaksa gambar ditarik melebar penuh tanpa margin sisa
+        // PENYETELAN FINAL: Mengunci ukuran tinggi kaku [1100, 620] agar mutlak 1 lembar halaman
         const pdfConfig = {
             margin:       0,
             filename:     'Nota_Azka_' + namaPlg.replace(/\s+/g, '_') + '.pdf',
             image:        { type: 'jpeg', quality: 1.0 },
             html2canvas:  { 
-                scale: 3, // Menaikkan skala ke 3 agar tulisan teks sangat tajam saat dicetak penuh
+                scale: 3, 
                 useCORS: true, 
                 logging: false, 
                 scrollY: 0,
                 scrollX: 0
             },
-            jsPDF:        { unit: 'px', format: [1100, 720], orientation: 'landscape' }
+            jsPDF:        { unit: 'px', format: [1100, 620], orientation: 'landscape' }
         };
 
         html2pdf().set(pdfConfig).from(paper).save().then(() => {
-            // Kembalikan tampilan menu HP Anda setelah selesai download
             navbar.style.display = 'flex';
             sidebar.style.display = 'block';
             wrapper.style.padding = '40px 20px';
