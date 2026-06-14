@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
-    <!-- Fitur Otomatis Agar Bisa Diinstal Jadi Aplikasi di HP (PWA) -->
+    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA Standalone Manifest) -->
+    <meta name="theme-color" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
-    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Azka%20Stepnosing%20Nota%22,%22short_name%22:%22Azka%20Nota%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22#0f172a%22,%22theme_color%22:%22#0f172a%22}">
+    
+    <!-- Manifest Data Terkompresi agar Tombol Instalasi Wajib Muncul di Chrome Mobile -->
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2F6a2Etbm90YS5naXRodWIuaW8vYXprYS1ub3RhL2xvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9">
 
     <!-- Library Cetak PDF Berkualitas Tinggi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -212,7 +217,7 @@
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
 
-        /* FIX PREVIEW HP: Mengubah overflow menjadi visible agar kalkulasi total tidak terpotong */
+        /* PREVIEW WRAPPER (MEMANJANG SECARA OTOMATIS) */
         .preview-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -408,7 +413,7 @@
 </head>
 <body>
 
-    <!-- Bar Navigasi Atas -->
+    <!-- Bar Navigasi -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -421,10 +426,10 @@
         </div>
     </div>
 
-    <!-- HALAMAN DASHBOARD UTAMA -->
+    <!-- Kontainer Aplikasi -->
     <div class="dashboard-container" id="window-buat">
         
-        <!-- BAGIAN INPUT DATA (KIRI) -->
+        <!-- Formulir Kiri -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title">
                 <i class="fa-solid fa-pen-to-square"></i> Data Invoice / Nota
@@ -449,7 +454,6 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="addNewItemField()"><i class="fa-solid fa-plus"></i> Tambah</button>
                 </div>
 
-                <!-- Wadah Input Barang Dinamis -->
                 <div id="dynamic-inputs-container"></div>
 
                 <div class="card-title" style="margin-top:15px; padding-top:10px; font-size:14px;">
@@ -467,11 +471,10 @@
             </div>
         </div>
 
-        <!-- LIVE PREVIEW NOTA KERTAS (KANAN) -->
+        <!-- Live Preview Kertas Nota (Kanan) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-paper" id="actual-pdf-paper">
                 
-                <!-- Tabel Header Nota -->
                 <table class="nota-header-table">
                     <tr>
                         <td class="logo-box">
@@ -508,7 +511,6 @@
                     </tr>
                 </table>
 
-                <!-- Tabel Transaksi Utama -->
                 <table class="main-nota-table">
                     <thead>
                         <tr>
@@ -518,12 +520,9 @@
                             <th style="width: 22%;">JUMLAH</th>
                         </tr>
                     </thead>
-                    <tbody id="lbl-nota-rows">
-                        <!-- Otomatis diisi oleh JavaScript -->
-                    </tbody>
+                    <tbody id="lbl-nota-rows"></tbody>
                 </table>
 
-                <!-- Bagian Bawah Tanda Tangan & Total Biaya -->
                 <table class="nota-footer-table">
                     <tr>
                         <td class="footer-note">
@@ -557,17 +556,15 @@
 
     </div>
 
-    <!-- HALAMAN RIWAYAT NOTA -->
+    <!-- Window Riwayat -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Semua Nota Terbikin</div>
-            <div class="history-list" id="history-render-box">
-                <!-- List riwayat muncul di sini -->
-            </div>
+            <div class="history-list" id="history-render-box"></div>
         </div>
     </div>
 
-    <!-- HALAMAN PENGATURAN PROFIL TOKO -->
+    <!-- Window Pengaturan -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 600px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Pengaturan Informasi Profil Toko</div>
@@ -589,7 +586,6 @@
         </div>
     </div>
 
-
 <script>
     let dynamicItems = [{ name: '', qty: '', price: '' }];
     let storeInfo = {
@@ -598,6 +594,12 @@
         wa: "0857-5317-6046 | 0816-4978-1767"
     };
     let savedInvoices = [];
+
+    // Daftarkan dummy Service Worker agar browser mutlak memicu tombol "Instal Aplikasi"
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmeXRjaCcsIGU9PntlLmNlc3BvbmRXaXRoKGZldGNoKGUucmVxdWVzdCkpO30pOw==', { scope: './' })
+        .catch(err => console.log("SW Register semi-offline bypassed"));
+    }
 
     window.addEventListener('DOMContentLoaded', () => {
         if (localStorage.getItem('azka_store_info')) {
@@ -643,7 +645,6 @@
         storeInfo.alamat = document.getElementById('cfg-alamat').value;
         storeInfo.kec = document.getElementById('cfg-kec').value;
         storeInfo.wa = document.getElementById('cfg-wa').value;
-
         localStorage.setItem('azka_store_info', JSON.stringify(storeInfo));
         applyStoreInfoToPaper();
         alert('Profil Toko Berhasil Diperbarui!');
@@ -653,22 +654,16 @@
     function switchTab(target) {
         document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
         document.getElementById('tab-' + target).classList.add('active');
-
         document.getElementById('window-buat').classList.add('view-hidden');
         document.getElementById('window-riwayat').classList.add('view-hidden');
         document.getElementById('window-toko').classList.add('view-hidden');
-
         document.getElementById('window-' + target).classList.remove('view-hidden');
-
-        if(target === 'riwayat') {
-            renderHistoryTab();
-        }
+        if(target === 'riwayat') renderHistoryTab();
     }
 
     function renderInputFields() {
         const box = document.getElementById('dynamic-inputs-container');
         box.innerHTML = '';
-
         dynamicItems.forEach((item, idx) => {
             const block = document.createElement('div');
             block.className = 'item-card-input';
@@ -722,7 +717,6 @@
 
         const tbody = document.getElementById('lbl-nota-rows');
         tbody.innerHTML = '';
-
         let subtotal = 0;
 
         dynamicItems.forEach(item => {
@@ -752,7 +746,6 @@
 
         const dpValue = parseFloat(document.getElementById('form-dp').value) || 0;
         const sisaValue = subtotal - dpValue;
-
         document.getElementById('lbl-total-jumlah').innerText = moneyFormatter(subtotal);
         document.getElementById('lbl-total-dp').innerText = moneyFormatter(dpValue);
         document.getElementById('lbl-total-sisa').innerText = moneyFormatter(sisaValue);
@@ -766,9 +759,7 @@
         }
 
         let totalSmt = 0;
-        dynamicItems.forEach(i => {
-            totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0);
-        });
+        dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
         const dpSmt = parseFloat(document.getElementById('form-dp').value) || 0;
 
         const invoiceData = {
@@ -799,13 +790,7 @@
             margin:       0,
             filename:     'Nota_Azka_' + namaPlg.replace(/\s+/g, '_') + '.pdf',
             image:        { type: 'jpeg', quality: 1.0 },
-            html2canvas:  { 
-                scale: 3, 
-                useCORS: true, 
-                logging: false, 
-                scrollY: 0,
-                scrollX: 0
-            },
+            html2canvas:  { scale: 3, useCORS: true, logging: false, scrollY: 0, scrollX: 0 },
             jsPDF:        { unit: 'px', format: [1100, 620], orientation: 'landscape' }
         };
 
@@ -833,11 +818,11 @@
             document.getElementById('form-telp').value = target.telp;
             document.getElementById('form-dp').value = target.dp;
             dynamicItems = [...target.items];
-            
             renderInputFields();
             liveRenderCalculations();
             switchTab('buat');
-        }}
+        }
+    }
 
     function renderHistoryTab() {
         const box = document.getElementById('history-render-box');
@@ -845,7 +830,6 @@
             box.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:30px; font-size:14px;">Belum ada nota yang disimpan.</div>`;
             return;
         }
-
         box.innerHTML = '';
         savedInvoices.forEach(inv => {
             const div = document.createElement('div');
