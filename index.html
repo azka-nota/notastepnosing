@@ -41,7 +41,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation Bar --> Tidak ikut dicetak */
         .navbar {
             background-color: #0f172a;
             color: white;
@@ -88,7 +87,6 @@
             color: white;
         }
 
-        /* Main Layout Dashboard */
         .dashboard-container {
             max-width: 1400px;
             width: 100%;
@@ -126,7 +124,6 @@
             padding-bottom: 10px;
         }
 
-        /* Form Controls */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -159,7 +156,6 @@
             outline: none;
         }
 
-        /* Dynamic Items Section */
         .items-section-header {
             display: flex;
             justify-content: space-between;
@@ -184,7 +180,6 @@
             margin-bottom: 12px;
         }
 
-        /* Buttons styling */
         .btn {
             padding: 10px 16px;
             border-radius: 8px;
@@ -212,28 +207,28 @@
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
 
-        /* Live Preview Panel */
+        /* PERBAIKAN LIVE PREVIEW DI LAYAR HP (MENCEGAH TERPOTONG DI BAWAH) */
         .preview-wrapper {
+            width: 100%;
             overflow-x: auto;
+            overflow-y: visible;
             background: #475569;
-            padding: 40px 20px;
+            padding: 20px 10px;
             border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
         }
 
-        /* PERBAIKAN TINGGI MAKSIMAL: Dikunci ke 620px agar pas 1 lembar tanpa bocor */
         .nota-paper {
             width: 1100px;
             height: 620px;
-            max-height: 620px;
+            min-height: 620px;
             background: #ffffff;
             padding: 20px 30px;
             color: #000000;
             position: relative;
             box-sizing: border-box;
-            overflow: hidden;
             page-break-inside: avoid;
             page-break-after: avoid;
         }
@@ -260,7 +255,6 @@
             display: block;
         }
 
-        /* Teks slogan diposisikan rapat ke bawah logo */
         .logo-sub-text {
             font-size: 10px;
             font-weight: bold;
@@ -311,7 +305,6 @@
             min-height: 18px;
         }
 
-        /* Tabel Utama Nota Transaksi - Dirapatkan sedikit ruang vertikalnya */
         .main-nota-table {
             width: 100%;
             border-collapse: collapse;
@@ -338,7 +331,6 @@
         .text-center { text-align: center; }
         .text-right { text-align: right; }
 
-        /* Footer Nota & Total Pembayaran */
         .nota-footer-table {
             width: 100%;
             border-collapse: collapse;
@@ -388,7 +380,6 @@
             padding-right: 12px !important;
         }
 
-        /* Tab Riwayat */
         .history-list {
             display: flex;
             flex-direction: column;
@@ -745,7 +736,6 @@
             tbody.appendChild(tr);
         });
 
-        // Dioptimalkan menjadi 6 baris agar tingginya pas presisi di resolusi baru
         const minLines = 6;
         if(dynamicItems.length < minLines) {
             for(let i = dynamicItems.length; i < minLines; i++) {
@@ -800,7 +790,6 @@
         wrapper.style.padding = '0';
         wrapper.style.background = '#ffffff';
 
-        // PENYETELAN FINAL: Mengunci ukuran tinggi kaku [1100, 620] agar mutlak 1 lembar halaman
         const pdfConfig = {
             margin:       0,
             filename:     'Nota_Azka_' + namaPlg.replace(/\s+/g, '_') + '.pdf',
@@ -818,7 +807,7 @@
         html2pdf().set(pdfConfig).from(paper).save().then(() => {
             navbar.style.display = 'flex';
             sidebar.style.display = 'block';
-            wrapper.style.padding = '40px 20px';
+            wrapper.style.padding = '20px 10px';
             wrapper.style.background = '#475569';
         });
     }
