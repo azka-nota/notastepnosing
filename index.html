@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
-    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA Standalone Manifest) -->
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
-    
-    <!-- Manifest Data Terkompresi agar Tombol Instalasi Wajib Muncul di Chrome Mobile -->
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2F6a2Etbm90YS5naXRodWIuaW8vYXprYS1ub3RhL2xvZ28ucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9">
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiLAogICpndWlkZSI6ICJub25lIgp9">
 
-    <!-- Library Cetak PDF Berkualitas Tinggi -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -30,609 +24,316 @@
             --neutral-bg: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
-            --text-muted: #64748b;
             --border-color: #e2e8f0;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--neutral-bg); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
 
-        body {
-            background-color: var(--neutral-bg);
-            color: var(--text-main);
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
+        /* Navigation Bar */
         .navbar {
             background-color: #0f172a;
             color: white;
-            padding: 15px 20px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
+        .navbar .brand { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .nav-tabs { display: flex; background: #1e293b; padding: 3px; border-radius: 6px; gap: 4px; }
+        .nav-tab { padding: 6px 12px; color: #94a3b8; font-size: 13px; font-weight: 500; border-radius: 4px; cursor: pointer; }
+        .nav-tab.active { background: var(--primary-color); color: white; }
 
-        .navbar .brand {
-            font-weight: 700;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar .brand i {
-            color: #38bdf8;
-        }
-
-        .nav-tabs {
-            display: flex;
-            background: #1e293b;
-            padding: 4px;
-            border-radius: 8px;
-            gap: 5px;
-        }
-
-        .nav-tab {
-            padding: 8px 16px;
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .nav-tab.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
+        /* Dashboard Core Layout */
         .dashboard-container {
-            max-width: 1400px;
+            max-width: 1500px;
             width: 100%;
-            margin: 24px auto;
-            padding: 0 20px;
+            margin: 15px auto;
+            padding: 0 15px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 15px;
         }
+        @media (min-width: 1024px) { .dashboard-container { grid-template-columns: 400px 1fr; } }
 
-        @media (min-width: 1024px) {
-            .dashboard-container {
-                grid-template-columns: 450px 1fr;
-            }
-        }
+        .card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border-color); padding: 18px; height: fit-content; }
+        .card-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group label { font-size: 12px; font-weight: 600; color: #475569; }
+        .form-group input { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px; }
+        .form-group input:focus { border-color: var(--primary-color); outline: none; }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 24px;
-            height: fit-content;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-        }
-
-        .form-group input, .form-group textarea {
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border 0.2s;
-            background: #fff;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        .items-section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 24px;
-            margin-bottom: 12px;
-        }
-
-        .item-card-input {
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .item-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 8px;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: background 0.2s;
-            width: 100%;
-        }
-
-        .btn-sm {
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 6px;
-            width: auto;
-        }
-
+        .item-card-input { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; margin-bottom: 8px; }
+        .btn { padding: 10px 14px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; }
+        .btn-sm { padding: 4px 10px; font-size: 11px; width: auto; }
         .btn-primary { background: var(--primary-color); color: white; }
-        .btn-primary:hover { background: var(--primary-hover); }
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
 
-        /* PREVIEW WRAPPER (MEMANJANG SECARA OTOMATIS) */
+        /* LIVE PREVIEW WRAPPER DENGAN AUTO SCALING PAS DI LAYAR HP */
         .preview-wrapper {
             width: 100%;
-            overflow-x: auto;
-            overflow-y: visible;
             background: #475569;
-            padding: 20px 10px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            overflow: hidden;
         }
+        .nota-scale-container { width: 1000px; transform-origin: top left; }
 
+        /* KERTAS NOTA - ADJUSTED 1000px x 560px */
         .nota-paper {
-            width: 1100px;
-            height: 620px;
-            min-height: 620px;
+            width: 1000px;
+            height: 560px;
             background: #ffffff;
-            padding: 20px 30px;
+            padding: 25px 30px;
             color: #000000;
-            position: relative;
             box-sizing: border-box;
-            page-break-inside: avoid;
-            page-break-after: avoid;
+            position: relative;
         }
 
-        .nota-header-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 8px;
+        /* SUSUNAN HEADER 3 KOLOM SEJAJAR (ANTI-GESER) */
+        .nota-header-grid {
+            display: grid;
+            grid-template-columns: 240px 1fr 340px;
+            align-items: start;
+            margin-bottom: 12px;
         }
 
-        .nota-header-table td {
-            border: none;
-            vertical-align: top;
-            padding: 0;
-        }
+        /* Kolom 1: Logo & Slogan */
+        .header-left { display: flex; flex-direction: column; align-items: center; }
+        .header-left img { width: 100%; max-width: 210px; display: block; }
+        .slogan-text { font-size: 8px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; }
 
-        .logo-box {
-            width: 220px;
-            text-align: center;
-        }
+        /* Kolom 2: Info Bisnis / Detail Layanan */
+        .header-center { padding-left: 20px; font-size: 12px; line-height: 1.4; color: #000; }
+        .header-center .headline { font-weight: bold; margin-bottom: 1px; }
 
-        .logo-box img {
-            width: 100%;
-            display: block;
-        }
+        /* Kolom 3: Identitas Pembeli */
+        .header-right { display: flex; flex-direction: column; gap: 4px; padding-left: 20px; }
+        .meta-row { display: flex; font-size: 13px; align-items: flex-end; }
+        .meta-lbl { width: 65px; font-weight: normal; }
+        .meta-cln { width: 15px; text-align: center; }
+        .meta-val { flex-grow: 1; border-bottom: 1px dotted #000; font-weight: bold; min-height: 18px; padding-left: 2px; }
 
-        .logo-sub-text {
-            font-size: 10px;
-            font-weight: bold;
-            text-align: left;
-            margin-top: 4px;
-            line-height: 1.2;
-            color: #000000;
-            padding-left: 2px;
-        }
+        /* TABEL TRANSAKSI BARANG */
+        .nota-table { width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed; }
+        .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 5px; font-weight: bold; font-size: 12px; text-align: center; }
+        .nota-table td { border: 1px solid #000000; padding: 4px 8px; height: 28px; font-size: 13px; vertical-align: middle; }
 
-        .info-box {
-            padding-left: 20px;
-            font-size: 13px;
-            line-height: 1.4;
-        }
+        /* NOTA FOOTER STRUCTURE */
+        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 8px; align-items: start; }
+        .footer-left-info { font-style: italic; font-size: 11px; line-height: 1.4; padding-top: 4px; }
+        .footer-mid-sign { text-align: center; font-size: 13px; padding-top: 4px; }
+        
+        /* Tabel Perhitungan Finansial Right Side */
+        .footer-right-calc { width: 100%; border-collapse: collapse; }
+        .footer-right-calc td { border: 1px solid #000000; padding: 4px 8px; font-size: 12px; font-weight: bold; }
+        .lbl-calc-side { text-align: right; width: 45%; background: #ffffff; padding-right: 10px; }
 
-        .info-box .headline {
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 2px;
-        }
-
-        .customer-box {
-            width: 320px;
-            padding-left: 20px;
-        }
-
-        .meta-entry {
-            display: flex;
-            margin-bottom: 5px;
-            font-size: 13px;
-            align-items: flex-end;
-        }
-
-        .meta-label {
-            width: 75px;
-        }
-
-        .meta-colon {
-            width: 12px;
-        }
-
-        .meta-value-line {
-            flex-grow: 1;
-            border-bottom: 1px dotted #000;
-            font-weight: bold;
-            padding-left: 4px;
-            min-height: 18px;
-        }
-
-        .main-nota-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-        }
-
-        .main-nota-table th {
-            background: #e2e8f0;
-            border: 1px solid #000000;
-            padding: 6px;
-            font-weight: bold;
-            font-size: 13px;
-            text-align: center;
-        }
-
-        .main-nota-table td {
-            border: 1px solid #000000;
-            padding: 6px;
-            height: 30px;
-            font-size: 13px;
-            vertical-align: middle;
-        }
-
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-
-        .nota-footer-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .nota-footer-table td {
-            border: none;
-            vertical-align: top;
-            padding: 0;
-        }
-
-        .footer-note {
-            width: 40%;
-            font-style: italic;
-            font-size: 12px;
-            line-height: 1.3;
-            padding-top: 4px;
-        }
-
-        .footer-sign {
-            width: 25%;
-            text-align: center;
-            font-size: 13px;
-            padding-top: 4px;
-        }
-
-        .footer-calc {
-            width: 35%;
-        }
-
-        .calc-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .calc-table td {
-            border: 1px solid #000000 !important;
-            padding: 5px 10px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .calc-lbl {
-            text-align: right;
-            width: 45%;
-            padding-right: 12px !important;
-        }
-
-        .history-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .history-item {
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .view-hidden {
-            display: none !important;
-        }
+        .view-hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Bar Navigasi -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span>AZKA STEPNOSING - Sistem Nota v2.0</span>
+            <span>AZKA STEPNOSING - Sistem Nota Resmi</span>
         </div>
         <div class="nav-tabs">
-            <div class="nav-tab active" id="tab-buat" onclick="switchTab('buat')">Buat Nota</div>
-            <div class="nav-tab" id="tab-riwayat" onclick="switchTab('riwayat')">Riwayat Nota</div>
-            <div class="nav-tab" id="tab-toko" onclick="switchTab('toko')">Pengaturan Toko</div>
+            <div class="nav-tab active" id="tab-buat" onclick="switchTab('buat')">Buat</div>
+            <div class="nav-tab" id="tab-riwayat" onclick="switchTab('riwayat')">Riwayat</div>
+            <div class="nav-tab" id="tab-toko" onclick="switchTab('toko')">Profil</div>
         </div>
     </div>
 
-    <!-- Kontainer Aplikasi -->
     <div class="dashboard-container" id="window-buat">
         
-        <!-- Formulir Kiri -->
         <div class="card" id="input-sidebar-card">
-            <div class="card-title">
-                <i class="fa-solid fa-pen-to-square"></i> Data Invoice / Nota
-            </div>
-            
+            <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> Input Data Transaksi</div>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Tanggal Transaksi</label>
-                    <input type="text" id="form-tanggal" placeholder="Hari, Tanggal Bulan Tahun">
+                    <label>Tanggal</label>
+                    <input type="text" id="form-tanggal">
                 </div>
                 <div class="form-group">
                     <label>Nama Pelanggan</label>
-                    <input type="text" id="form-nama" placeholder="Masukkan nama pelanggan">
+                    <input type="text" id="form-nama" placeholder="Nama pembeli">
                 </div>
                 <div class="form-group">
-                    <label>No. WhatsApp / Telp</label>
-                    <input type="text" id="form-telp" placeholder="Contoh: 0812-xxxx-xxxx">
+                    <label>No. Telp</label>
+                    <input type="text" id="form-telp" placeholder="Nomor kontak">
                 </div>
 
-                <div class="items-section-header">
-                    <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">Daftar Pembelian</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <span style="font-weight:700; font-size:12px;">Item Pembelian</span>
                     <button type="button" class="btn btn-primary btn-sm" onclick="addNewItemField()"><i class="fa-solid fa-plus"></i> Tambah</button>
                 </div>
 
                 <div id="dynamic-inputs-container"></div>
 
-                <div class="card-title" style="margin-top:15px; padding-top:10px; font-size:14px;">
-                    <i class="fa-solid fa-money-bill-wave"></i> Sistem Pembayaran
-                </div>
-
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 5px;">
                     <label>Uang Muka / DP (Rp)</label>
                     <input type="number" id="form-dp" value="0" oninput="liveRenderCalculations()">
                 </div>
 
-                <div style="margin-top: 15px; display: flex; gap: 10px;">
-                    <button class="btn btn-success" style="padding: 14px;" onclick="generateAndSaveNota()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN & DOWNLOAD PDF</button>
-                </div>
+                <button class="btn btn-success" style="margin-top: 5px;" onclick="generateAndSaveNota()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN & CETAK PDF</button>
             </div>
         </div>
 
-        <!-- Live Preview Kertas Nota (Kanan) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
-            <div class="nota-paper" id="actual-pdf-paper">
-                
-                <table class="nota-header-table">
-                    <tr>
-                        <td class="logo-box">
-                            <img src="logo.png" alt="Logo Azka Stepnosing" onerror="this.src='https://azka-nota.github.io/azka-nota/logo.png'">
-                            <div class="logo-sub-text">
+            <div class="nota-scale-container" id="nota-scale-box">
+                <div class="nota-paper" id="actual-pdf-paper">
+                    
+                    <div class="nota-header-grid">
+                        <div class="header-left">
+                            <img src="logo.png" alt="AZKA STEPNOSING" onerror="this.style.display='none'; document.getElementById('alt-logo-txt').style.display='block';">
+                            <div id="alt-logo-txt" style="display:none; font-weight:800; font-size:16px; color:#000;">AZKA STEPNOSING</div>
+                            <div class="slogan-text">
                                 HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
-                        </td>
-                        <td class="info-box">
+                        </div>
+                        <div class="header-center">
                             <div class="headline">Melayani Penjualan :</div>
                             <div>Granit Lantai & Dinding, Stepnosing Tangga,</div>
                             <div>Custom Potong Granit Dan Lain-lain.</div>
-                            <div style="margin-top: 4px; font-weight: bold;" id="lbl-toko-alamat">Desa Takuti RT. 02,</div>
+                            <div style="margin-top: 3px; font-weight: bold;" id="lbl-toko-alamat">Desa Takuti RT. 02,</div>
                             <div style="font-weight: bold;" id="lbl-toko-kec">Kec. Mataraman, Kab. Banjar</div>
-                            <div style="margin-top: 4px;" id="lbl-toko-wa">0857-5317-6046 | 0816-4978-1767</div>
-                        </td>
-                        <td class="customer-box">
-                            <div class="meta-entry">
-                                <div class="meta-label">Tanggal</div>
-                                <div class="meta-colon">:</div>
-                                <div class="meta-value-line" id="lbl-nota-tanggal"></div>
+                            <div id="lbl-toko-wa">0857-5317-6046 | 0816-4978-1767</div>
+                        </div>
+                        <div class="header-right">
+                            <div class="meta-row">
+                                <div class="meta-lbl">Tanggal</div>
+                                <div class="meta-cln">:</div>
+                                <div class="meta-val" id="lbl-nota-tanggal"></div>
                             </div>
-                            <div class="meta-entry">
-                                <div class="meta-label">Nama</div>
-                                <div class="meta-colon">:</div>
-                                <div class="meta-value-line" id="lbl-nota-nama"></div>
+                            <div class="meta-row">
+                                <div class="meta-lbl">Nama</div>
+                                <div class="meta-cln">:</div>
+                                <div class="meta-val" id="lbl-nota-nama"></div>
                             </div>
-                            <div class="meta-entry">
-                                <div class="meta-label">No. Telp</div>
-                                <div class="meta-colon">:</div>
-                                <div class="meta-value-line" id="lbl-nota-telp"></div>
+                            <div class="meta-row">
+                                <div class="meta-lbl">No. Telp</div>
+                                <div class="meta-cln">:</div>
+                                <div class="meta-val" id="lbl-nota-telp"></div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
 
-                <table class="main-nota-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 8%;">QTY</th>
-                            <th style="width: 52%;">NAMA BARANG</th>
-                            <th style="width: 18%;">HARGA</th>
-                            <th style="width: 22%;">JUMLAH</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lbl-nota-rows"></tbody>
-                </table>
+                    <table class="nota-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">QTY</th>
+                                <th style="width: 54%;">NAMA BARANG</th>
+                                <th style="width: 16%;">HARGA</th>
+                                <th style="width: 22%;">JUMLAH</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lbl-nota-rows"></tbody>
+                    </table>
 
-                <table class="nota-footer-table">
-                    <tr>
-                        <td class="footer-note">
+                    <div class="nota-footer-grid">
+                        <div class="footer-left-info">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
-                        </td>
-                        <td class="footer-sign">
+                        </div>
+                        <div class="footer-mid-sign">
                             Hormat Kami,<br><br><br>
                             <div style="font-weight:bold;">( .................................... )</div>
-                        </td>
-                        <td class="footer-calc">
-                            <table class="calc-table">
+                        </div>
+                        <div>
+                            <table class="footer-right-calc">
                                 <tr>
-                                    <td class="calc-lbl">JUMLAH Rp.</td>
-                                    <td class="text-right" id="lbl-total-jumlah">0</td>
+                                    <td class="lbl-calc-side">JUMLAH Rp.</td>
+                                    <td style="text-align: right;" id="lbl-total-jumlah">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="calc-lbl">DP Rp.</td>
-                                    <td class="text-right" id="lbl-total-dp">0</td>
+                                    <td class="lbl-calc-side">DP Rp.</td>
+                                    <td style="text-align: right;" id="lbl-total-dp">0</td>
                                 </tr>
                                 <tr>
-                                    <td class="calc-lbl">SISA Rp.</td>
-                                    <td class="text-right" id="lbl-total-sisa">0</td>
+                                    <td class="lbl-calc-side">SISA Rp.</td>
+                                    <td style="text-align: right;" id="lbl-total-sisa">0</td>
                                 </tr>
                             </table>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
 
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Window Riwayat -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Semua Nota Terbikin</div>
+            <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi</div>
             <div class="history-list" id="history-render-box"></div>
         </div>
     </div>
 
-    <!-- Window Pengaturan -->
-    <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 600px;">
+    <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-gears"></i> Pengaturan Informasi Profil Toko</div>
+            <div class="card-title"><i class="fa-solid fa-gears"></i> Konfigurasi Toko</div>
             <div class="form-grid">
-                <div class="form-group">
-                    <label>Baris Alamat Toko</label>
-                    <input type="text" id="cfg-alamat" value="Desa Takuti RT. 02,">
-                </div>
-                <div class="form-group">
-                    <label>Baris Kecamatan / Kabupaten</label>
-                    <input type="text" id="cfg-kec" value="Kec. Mataraman, Kab. Banjar">
-                </div>
-                <div class="form-group">
-                    <label>Nomor Kontak WA Aktif</label>
-                    <input type="text" id="cfg-wa" value="0857-5317-6046 | 0816-4978-1767">
-                </div>
-                <button class="btn btn-primary" onclick="saveStoreConfiguration()"><i class="fa-solid fa-check"></i> Perbarui Profil Toko</button>
+                <div class="form-group"><label>Alamat</label><input type="text" id="cfg-alamat" value="Desa Takuti RT. 02,"></div>
+                <div class="form-group"><label>Kecamatan/Kabupaten</label><input type="text" id="cfg-kec" value="Kec. Mataraman, Kab. Banjar"></div>
+                <div class="form-group"><label>Kontak WhatsApp</label><input type="text" id="cfg-wa" value="0857-5317-6046 | 0816-4978-1767"></div>
+                <button class="btn btn-primary" onclick="saveStoreConfiguration()">Simpan Perubahan</button>
             </div>
         </div>
     </div>
 
 <script>
     let dynamicItems = [{ name: '', qty: '', price: '' }];
-    let storeInfo = {
-        alamat: "Desa Takuti RT. 02,",
-        kec: "Kec. Mataraman, Kab. Banjar",
-        wa: "0857-5317-6046 | 0816-4978-1767"
-    };
+    let storeInfo = { alamat: "Desa Takuti RT. 02,", kec: "Kec. Mataraman, Kab. Banjar", wa: "0857-5317-6046 | 0816-4978-1767" };
     let savedInvoices = [];
 
-    // Daftarkan dummy Service Worker agar browser mutlak memicu tombol "Instal Aplikasi"
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmeXRjaCcsIGU9PntlLmNlc3BvbmRXaXRoKGZldGNoKGUucmVxdWVzdCkpO30pOw==', { scope: './' })
-        .catch(err => console.log("SW Register semi-offline bypassed"));
+    function adjustNotaScale() {
+        const wrapper = document.getElementById('preview-outer-wrapper');
+        const scaleBox = document.getElementById('nota-scale-box');
+        if (!wrapper || !scaleBox) return;
+        
+        const availableWidth = wrapper.clientWidth - 30;
+        const targetWidth = 1000;
+        
+        if (availableWidth < targetWidth) {
+            const scaleFactor = availableWidth / targetWidth;
+            scaleBox.style.transform = `scale(${scaleFactor})`;
+            wrapper.style.height = `${(560 * scaleFactor) + 30}px`;
+        } else {
+            scaleBox.style.transform = 'none';
+            wrapper.style.height = 'auto';
+        }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('azka_store_info')) {
-            storeInfo = JSON.parse(localStorage.getItem('azka_store_info'));
-        }
-        if (localStorage.getItem('azka_saved_invoices')) {
-            savedInvoices = JSON.parse(localStorage.getItem('azka_saved_invoices'));
-        }
+        if (localStorage.getItem('azka_store_info')) storeInfo = JSON.parse(localStorage.getItem('azka_store_info'));
+        if (localStorage.getItem('azka_saved_invoices')) savedInvoices = JSON.parse(localStorage.getItem('azka_saved_invoices'));
 
         document.getElementById('cfg-alamat').value = storeInfo.alamat;
         document.getElementById('cfg-kec').value = storeInfo.kec;
         document.getElementById('cfg-wa').value = storeInfo.wa;
 
         const tgl = new Date();
-        const strTgl = tgl.getDate() + ' ' + tgl.toLocaleString('id-ID', { month: 'long' }) + ' ' + tgl.getFullYear();
-        document.getElementById('form-tanggal').value = strTgl;
+        document.getElementById('form-tanggal').value = tgl.getDate() + ' ' + tgl.toLocaleString('id-ID', { month: 'long' }) + ' ' + tgl.getFullYear();
 
         applyStoreInfoToPaper();
         bindFormSyncs();
         renderInputFields();
         liveRenderCalculations();
+        
+        adjustNotaScale();
+        window.addEventListener('resize', adjustNotaScale);
     });
 
     function bindFormSyncs() {
-        document.getElementById('form-tanggal').addEventListener('input', (e) => {
-            document.getElementById('lbl-nota-tanggal').innerText = e.target.value;
-        });
-        document.getElementById('form-nama').addEventListener('input', (e) => {
-            document.getElementById('lbl-nota-nama').innerText = e.target.value;
-        });
-        document.getElementById('form-telp').addEventListener('input', (e) => {
-            document.getElementById('lbl-nota-telp').innerText = e.target.value;
-        });
+        document.getElementById('form-tanggal').addEventListener('input', (e) => document.getElementById('lbl-nota-tanggal').innerText = e.target.value);
+        document.getElementById('form-nama').addEventListener('input', (e) => document.getElementById('lbl-nota-nama').innerText = e.target.value);
+        document.getElementById('form-telp').addEventListener('input', (e) => document.getElementById('lbl-nota-telp').innerText = e.target.value);
     }
 
     function applyStoreInfoToPaper() {
@@ -647,7 +348,7 @@
         storeInfo.wa = document.getElementById('cfg-wa').value;
         localStorage.setItem('azka_store_info', JSON.stringify(storeInfo));
         applyStoreInfoToPaper();
-        alert('Profil Toko Berhasil Diperbarui!');
+        alert('Profil Toko Diperbarui!');
         switchTab('buat');
     }
 
@@ -658,6 +359,7 @@
         document.getElementById('window-riwayat').classList.add('view-hidden');
         document.getElementById('window-toko').classList.add('view-hidden');
         document.getElementById('window-' + target).classList.remove('view-hidden');
+        if(target === 'buat') setTimeout(adjustNotaScale, 50);
         if(target === 'riwayat') renderHistoryTab();
     }
 
@@ -668,47 +370,24 @@
             const block = document.createElement('div');
             block.className = 'item-card-input';
             block.innerHTML = `
-                <div class="item-card-header">
-                    <span style="font-size:12px; font-weight:700; color:var(--primary-color);">Barang #${idx+1}</span>
-                    ${dynamicItems.length > 1 ? `<button class="btn btn-danger btn-sm" onclick="removeItemField(${idx})" style="padding:3px 8px;">Hapus</button>` : ''}
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="font-size:11px; font-weight:700; color:var(--primary-color);">Barang #${idx+1}</span>
+                    ${dynamicItems.length > 1 ? `<button class="btn btn-danger btn-sm" onclick="removeItemField(${idx})" style="padding:2px 6px;">Hapus</button>` : ''}
                 </div>
-                <div class="form-group" style="margin-bottom:8px;">
-                    <input type="text" placeholder="Nama / Jenis Barang" value="${item.name}" oninput="changeItemValue(${idx}, 'name', this.value)">
-                </div>
-                <div style="display:grid; grid-template-columns: 1fr 2fr; gap:10px;">
-                    <div class="form-group">
-                        <input type="number" placeholder="Qty" value="${item.qty}" oninput="changeItemValue(${idx}, 'qty', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" placeholder="Harga Satuan" value="${item.price}" oninput="changeItemValue(${idx}, 'price', this.value)">
-                    </div>
+                <input type="text" placeholder="Nama Barang" value="${item.name}" oninput="changeItemValue(${idx}, 'name', this.value)" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid var(--border-color); border-radius:4px; font-size:13px;">
+                <div style="display:grid; grid-template-columns: 1fr 2fr; gap:6px;">
+                    <input type="number" placeholder="Qty" value="${item.qty}" oninput="changeItemValue(${idx}, 'qty', this.value)" style="padding:6px; border:1px solid var(--border-color); border-radius:4px; font-size:13px;">
+                    <input type="number" placeholder="Harga Satuan" value="${item.price}" oninput="changeItemValue(${idx}, 'price', this.value)" style="padding:6px; border:1px solid var(--border-color); border-radius:4px; font-size:13px;">
                 </div>
             `;
             box.appendChild(block);
         });
     }
 
-    function addNewItemField() {
-        dynamicItems.push({ name: '', qty: '', price: '' });
-        renderInputFields();
-        liveRenderCalculations();
-    }
-
-    function removeItemField(idx) {
-        dynamicItems.splice(idx, 1);
-        renderInputFields();
-        liveRenderCalculations();
-    }
-
-    function changeItemValue(idx, field, value) {
-        dynamicItems[idx][field] = value;
-        liveRenderCalculations();
-    }
-
-    function moneyFormatter(num) {
-        if(!num || isNaN(num)) return '0';
-        return parseFloat(num).toLocaleString('id-ID');
-    }
+    function addNewItemField() { dynamicItems.push({ name: '', qty: '', price: '' }); renderInputFields(); liveRenderCalculations(); }
+    function removeItemField(idx) { dynamicItems.splice(idx, 1); renderInputFields(); liveRenderCalculations(); }
+    function changeItemValue(idx, field, value) { dynamicItems[idx][field] = value; liveRenderCalculations(); }
+    function moneyFormatter(num) { return (!num || isNaN(num)) ? '0' : parseFloat(num).toLocaleString('id-ID'); }
 
     function liveRenderCalculations() {
         document.getElementById('lbl-nota-tanggal').innerText = document.getElementById('form-tanggal').value;
@@ -735,7 +414,8 @@
             tbody.appendChild(tr);
         });
 
-        const minLines = 6;
+        // Selalu buat minimal 8 baris tabel sesuai gambar target asli Anda
+        const minLines = 8;
         if(dynamicItems.length < minLines) {
             for(let i = dynamicItems.length; i < minLines; i++) {
                 const dummyTr = document.createElement('tr');
@@ -745,65 +425,58 @@
         }
 
         const dpValue = parseFloat(document.getElementById('form-dp').value) || 0;
-        const sisaValue = subtotal - dpValue;
         document.getElementById('lbl-total-jumlah').innerText = moneyFormatter(subtotal);
         document.getElementById('lbl-total-dp').innerText = moneyFormatter(dpValue);
-        document.getElementById('lbl-total-sisa').innerText = moneyFormatter(sisaValue);
+        document.getElementById('lbl-total-sisa').innerText = moneyFormatter(subtotal - dpValue);
     }
 
     function generateAndSaveNota() {
         const namaPlg = document.getElementById('form-nama').value.trim();
-        if(!namaPlg) {
-            alert('Mohon isi Nama Pelanggan terlebih dahulu sebelum menyimpan!');
-            return;
-        }
+        if(!namaPlg) { alert('Mohon isi Nama Pelanggan!'); return; }
 
         let totalSmt = 0;
         dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
-        const dpSmt = parseFloat(document.getElementById('form-dp').value) || 0;
-
-        const invoiceData = {
-            id: 'INV-' + Date.now(),
-            tanggal: document.getElementById('form-tanggal').value,
-            nama: namaPlg,
-            telp: document.getElementById('form-telp').value,
-            items: [...dynamicItems],
-            total: totalSmt,
-            dp: dpSmt,
-            sisa: totalSmt - dpSmt
-        };
-
-        savedInvoices.unshift(invoiceData);
+        
+        savedInvoices.unshift({
+            id: 'INV-' + Date.now(), tanggal: document.getElementById('form-tanggal').value,
+            nama: namaPlg, telp: document.getElementById('form-telp').value,
+            items: [...dynamicItems], total: totalSmt, dp: parseFloat(document.getElementById('form-dp').value) || 0,
+            sisa: totalSmt - (parseFloat(document.getElementById('form-dp').value) || 0)
+        });
         localStorage.setItem('azka_saved_invoices', JSON.stringify(savedInvoices));
 
         const navbar = document.getElementById('main-navbar');
         const sidebar = document.getElementById('input-sidebar-card');
         const wrapper = document.getElementById('preview-outer-wrapper');
+        const scaleBox = document.getElementById('nota-scale-box');
         const paper = document.getElementById('actual-pdf-paper');
 
+        scaleBox.style.transform = 'none';
         navbar.style.display = 'none';
         sidebar.style.display = 'none';
         wrapper.style.padding = '0';
         wrapper.style.background = '#ffffff';
+        wrapper.style.height = 'auto';
 
         const pdfConfig = {
             margin:       0,
             filename:     'Nota_Azka_' + namaPlg.replace(/\s+/g, '_') + '.pdf',
             image:        { type: 'jpeg', quality: 1.0 },
-            html2canvas:  { scale: 3, useCORS: true, logging: false, scrollY: 0, scrollX: 0 },
-            jsPDF:        { unit: 'px', format: [1100, 620], orientation: 'landscape' }
+            html2canvas:  { scale: 3, useCORS: true, logging: false },
+            jsPDF:        { unit: 'px', format: [1000, 560], orientation: 'landscape' }
         };
 
         html2pdf().set(pdfConfig).from(paper).save().then(() => {
             navbar.style.display = 'flex';
             sidebar.style.display = 'block';
-            wrapper.style.padding = '20px 10px';
+            wrapper.style.padding = '15px';
             wrapper.style.background = '#475569';
+            adjustNotaScale();
         });
     }
 
     function deleteHistoryItem(id) {
-        if(confirm('Apakah Anda yakin ingin menghapus data nota ini dari riwayat?')) {
+        if(confirm('Hapus nota ini dari riwayat?')) {
             savedInvoices = savedInvoices.filter(inv => inv.id !== id);
             localStorage.setItem('azka_saved_invoices', JSON.stringify(savedInvoices));
             renderHistoryTab();
@@ -826,24 +499,18 @@
 
     function renderHistoryTab() {
         const box = document.getElementById('history-render-box');
-        if(savedInvoices.length === 0) {
-            box.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:30px; font-size:14px;">Belum ada nota yang disimpan.</div>`;
-            return;
-        }
+        if(savedInvoices.length === 0) { box.innerHTML = `<div style="text-align:center; padding:20px; font-size:13px;">Belum ada nota.</div>`; return; }
         box.innerHTML = '';
         savedInvoices.forEach(inv => {
             const div = document.createElement('div');
             div.className = 'history-item';
             div.innerHTML = `
                 <div>
-                    <div style="font-weight:700; font-size:15px; margin-bottom:4px;">${inv.nama}</div>
-                    <div style="font-size:12px; color:var(--text-muted);">
-                        <span><i class="fa-solid fa-calendar"></i> ${inv.tanggal}</span> &nbsp;|&nbsp; 
-                        <span><i class="fa-solid fa-money-check-dollar"></i> Sisa: Rp ${moneyFormatter(inv.sisa)}</span>
-                    </div>
+                    <div style="font-weight:700; font-size:14px;">${inv.nama}</div>
+                    <div style="font-size:11px; color:#64748b;">${inv.tanggal} &nbsp;|&nbsp; Sisa: Rp ${moneyFormatter(inv.sisa)}</div>
                 </div>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn btn-primary btn-sm" onclick="loadInvoiceToForm('${inv.id}')"><i class="fa-solid fa-folder-open"></i> Buka</button>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn btn-primary btn-sm" onclick="loadInvoiceToForm('${inv.id}')">Buka</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteHistoryItem('${inv.id}')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `;
