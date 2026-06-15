@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
+    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA Resmi via Manifest File) -->
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiCn0=">
+    <link rel="manifest" href="./manifest.json">
 
+    <!-- Library Pendukung (Cetak PDF & Ikon) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -83,7 +85,7 @@
         }
         .nota-scale-container { width: 1000px; transform-origin: top left; }
 
-        /* KERTAS NOTA (Optimasi Tinggi Pas 560px Dengan Padding Ketat Luar) */
+        /* KERTAS NOTA (Optimasi Tinggi Pas 560px) */
         .nota-paper {
             width: 1000px;
             height: 560px;
@@ -142,6 +144,7 @@
 </head>
 <body>
 
+    <!-- Bar Navigasi Sistem -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-cloud"></i>
@@ -154,8 +157,10 @@
         </div>
     </div>
 
+    <!-- Main Kontainer Dashboard -->
     <div class="dashboard-container" id="window-buat">
         
+        <!-- Input Area Form Transaksi (Sisi Kiri) -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> Input Data Transaksi</div>
             <div class="form-grid">
@@ -186,14 +191,17 @@
 
                 <button class="btn btn-success" style="margin-top: 5px;" onclick="generateAndSaveNota()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN & CETAK PDF</button>
                 
+                <!-- Tombol Pasang Aplikasi PWA -->
                 <button id="pwa-install-btn" class="btn btn-primary view-hidden" style="margin-top: 8px; background: #475569;"><i class="fa-solid fa-download"></i> PASANG APLIKASI DI HP</button>
             </div>
         </div>
 
+        <!-- Live Preview Area Kertas Real-time (Sisi Kanan) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-scale-container" id="nota-scale-box">
                 <div class="nota-paper" id="actual-pdf-paper">
                     
+                    <!-- Konstruksi Atas Nota Sejajar -->
                     <div class="nota-header-grid">
                         <div class="header-left">
                             <img src="logo.png" alt="AZKA STEPNOSING" class="logo-img">
@@ -225,6 +233,7 @@
                         </div>
                     </div>
 
+                    <!-- Tabel Isi Item Transaksi -->
                     <table class="nota-table">
                         <thead>
                             <tr>
@@ -237,6 +246,7 @@
                         <tbody id="lbl-nota-rows"></tbody>
                     </table>
 
+                    <!-- Struktur Bagian Tanda Tangan & Perhitungan Finansial -->
                     <div class="nota-footer-grid">
                         <div class="footer-left-info">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
@@ -269,6 +279,7 @@
 
     </div>
 
+    <!-- Riwayat Transaksi Panel Cloud -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi (Cloud Firebase)</div>
@@ -276,6 +287,7 @@
         </div>
     </div>
 
+    <!-- Profil Toko -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Konfigurasi Toko</div>
@@ -288,6 +300,7 @@
         </div>
     </div>
 
+<!-- Modul Core SDK Firebase CDN v9 -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
@@ -558,19 +571,25 @@
     }
 </script>
 
+<!-- Logika Aktivasi & Pemicu Instalasi PWA Otomatis -->
 <script>
     let deferredPrompt;
     const installBtn = document.getElementById('pwa-install-btn');
 
+    // Registrasi Service Worker PWA
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').then(() => {
-            console.log('Aplikasi Sistem Terdaftar Aman!');
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker Berhasil Didaftarkan:', reg.scope))
+                .catch(err => console.error('Service Worker Gagal Didaftarkan:', err));
         });
     }
 
+    // Tangkap event sebelum instalasi ditawarkan oleh browser
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
+        // Munculkan tombol pasang aplikasi di form sebelah kiri
         installBtn.classList.remove('view-hidden');
     });
 
@@ -579,15 +598,17 @@
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
             if (outcome === 'accepted') {
+                console.log('User menerima tawaran instalasi aplikasi.');
                 installBtn.classList.add('view-hidden');
             }
             deferredPrompt = null;
         }
     });
 
+    // Sembunyikan tombol jika aplikasi sudah sukses terpasang
     window.addEventListener('appinstalled', () => {
         installBtn.classList.add('view-hidden');
-        console.log('Aplikasi Azka Nota Sukses Terpasang di Home Screen!');
+        alert('Aplikasi Azka Nota Sukses Terpasang di Layar Utama HP Anda!');
     });
 </script>
 </body>
