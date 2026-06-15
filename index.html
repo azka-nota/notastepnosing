@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
-    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA Resmi via Manifest File) -->
+    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA) -->
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
     <link rel="manifest" href="./manifest.json">
 
@@ -85,7 +86,7 @@
         }
         .nota-scale-container { width: 1000px; transform-origin: top left; }
 
-        /* KERTAS NOTA (Optimasi Tinggi Pas 560px) */
+        /* KERTAS NOTA */
         .nota-paper {
             width: 1000px;
             height: 560px;
@@ -104,15 +105,12 @@
             margin-bottom: 4px;
         }
 
-        /* Kolom 1: Kontainer Logo */
         .header-left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .logo-img { width: 195px; height: auto; object-fit: contain; display: block; }
         
-        /* Kolom 2: Info Layanan Komplit */
         .header-center { padding-left: 25px; font-size: 12px; line-height: 1.35; color: #000000; }
         .header-center .headline { font-weight: bold; margin-bottom: 1px; }
 
-        /* Kolom 3: Info Pelanggan */
         .header-right { display: flex; flex-direction: column; gap: 4px; padding-left: 20px; color: #000000; }
         .meta-row { display: flex; font-size: 13px; align-items: flex-end; }
         .meta-lbl { width: 65px; font-weight: bold; }
@@ -140,6 +138,9 @@
         .view-hidden { display: none !important; }
         .history-list { display: flex; flex-direction: column; gap: 10px; }
         .history-item { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Kotak Info PWA Khusus Manual */
+        .pwa-helper-box { background: #f0fdf4; border: 1px dashed #16a34a; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 12px; text-align: center; color: #14532d; }
     </style>
 </head>
 <body>
@@ -191,8 +192,15 @@
 
                 <button class="btn btn-success" style="margin-top: 5px;" onclick="generateAndSaveNota()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN & CETAK PDF</button>
                 
-                <!-- Tombol Pasang Aplikasi PWA -->
-                <button id="pwa-install-btn" class="btn btn-primary view-hidden" style="margin-top: 8px; background: #475569;"><i class="fa-solid fa-download"></i> PASANG APLIKASI DI HP</button>
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 8px 0;">
+
+                <!-- Tombol Pasang Aplikasi Sistem PWA Otomatis -->
+                <button id="pwa-install-btn" class="btn btn-primary view-hidden" style="background: #0f172a;"><i class="fa-solid fa-square-plus"></i> TAMBAH KE LAYAR UTAMA</button>
+                
+                <!-- Petunjuk Manual Jika Browser Memblokir Tombol Otomatis -->
+                <div id="pwa-manual-box" class="pwa-helper-box">
+                    <i class="fa-solid fa-circle-info"></i> <strong>Cara Instal ke HP:</strong><br>Klik ikon <b>titik tiga (⋮)</b> di pojok kanan atas Chrome, lalu pilih menu <b>"Tambahkan ke Layar Utama"</b> atau <b>"Instal Aplikasi"</b>.
+                </div>
             </div>
         </div>
 
@@ -201,7 +209,6 @@
             <div class="nota-scale-container" id="nota-scale-box">
                 <div class="nota-paper" id="actual-pdf-paper">
                     
-                    <!-- Konstruksi Atas Nota Sejajar -->
                     <div class="nota-header-grid">
                         <div class="header-left">
                             <img src="logo.png" alt="AZKA STEPNOSING" class="logo-img">
@@ -233,7 +240,6 @@
                         </div>
                     </div>
 
-                    <!-- Tabel Isi Item Transaksi -->
                     <table class="nota-table">
                         <thead>
                             <tr>
@@ -246,7 +252,6 @@
                         <tbody id="lbl-nota-rows"></tbody>
                     </table>
 
-                    <!-- Struktur Bagian Tanda Tangan & Perhitungan Finansial -->
                     <div class="nota-footer-grid">
                         <div class="footer-left-info">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
@@ -571,44 +576,50 @@
     }
 </script>
 
-<!-- Logika Aktivasi & Pemicu Instalasi PWA Otomatis -->
+<!-- Skrip Pengendali Utama Fitur "Tambah ke Layar Utama" (PWA) -->
 <script>
     let deferredPrompt;
     const installBtn = document.getElementById('pwa-install-btn');
+    const manualBox = document.getElementById('pwa-manual-box');
 
-    // Registrasi Service Worker PWA
+    // Registrasi Service Worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Service Worker Berhasil Didaftarkan:', reg.scope))
-                .catch(err => console.error('Service Worker Gagal Didaftarkan:', err));
+                .then(reg => console.log('Sistem Aplikasi Terverifikasi Aman.', reg.scope))
+                .catch(err => console.error('Gagal verifikasi berkas:', err));
         });
     }
 
-    // Tangkap event sebelum instalasi ditawarkan oleh browser
+    // Deteksi jika browser siap memicu penginstalan otomatis
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        // Munculkan tombol pasang aplikasi di form sebelah kiri
+        
+        // Sembunyikan panduan manual, tampilkan tombol utama "Tambah ke Layar Utama"
         installBtn.classList.remove('view-hidden');
+        manualBox.style.display = 'none';
     });
 
+    // Aksi Klik Tombol "Tambah ke Layar Utama"
     installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('User menerima tawaran instalasi aplikasi.');
-                installBtn.classList.add('view-hidden');
-            }
-            deferredPrompt = null;
+        if (!deferredPrompt) return;
+        
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+            console.log('User mengonfirmasi pemasangan aplikasi.');
+            installBtn.classList.add('view-hidden');
         }
+        deferredPrompt = null;
     });
 
-    // Sembunyikan tombol jika aplikasi sudah sukses terpasang
+    // Aksi Sukses Terinstal
     window.addEventListener('appinstalled', () => {
         installBtn.classList.add('view-hidden');
-        alert('Aplikasi Azka Nota Sukses Terpasang di Layar Utama HP Anda!');
+        manualBox.style.display = 'none';
+        alert('Aplikasi Sukses Ditambahkan ke Layar Utama!');
     });
 </script>
 </body>
