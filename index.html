@@ -95,7 +95,7 @@
             position: relative;
         }
 
-        /* SUSUNAN HEADER 3 KOLOM SEJAJAR (ANTI-GESER) */
+        /* SUSUNAN HEADER 3 KOLOM SEJAJAR */
         .nota-header-grid {
             display: grid;
             grid-template-columns: 240px 1fr 340px;
@@ -103,9 +103,9 @@
             margin-bottom: 12px;
         }
 
-        /* Kolom 1: Logo Embedded Base64 & Slogan */
+        /* Kolom 1: Logo & Slogan */
         .header-left { display: flex; flex-direction: column; align-items: center; }
-        .header-left img { width: 100%; max-width: 210px; display: block; filter: brightness(0); }
+        .header-left img { width: 100%; max-width: 210px; display: block; }
         .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; }
 
         /* Kolom 2: Info Bisnis / Detail Layanan */
@@ -147,7 +147,7 @@
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span>AZKA STEPNOSING - Sistem Nota Resmi</span>
+            <span>AZKA STEPNOSING - Sistem Nota Cloud</span>
         </div>
         <div class="nav-tabs">
             <div class="nav-tab active" id="tab-buat" onclick="switchTab('buat')">Buat</div>
@@ -196,7 +196,7 @@
                     
                     <div class="nota-header-grid">
                         <div class="header-left">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAYAAACkqwNfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJTSURBVHgB7ZpBbtNAEIY/O8SChAtAnIDYs8AecgCOgAtAnIDYp8AeoByAG7An6Am6AnECYg8g9gK6gAun8XwzSbyu7bV3vGvH8XwS68S7s7v2b3bGG8vE0p8vPz5vEusN66mKdc+6z7rBesS6KbeCAnN4Gq5G739C7i2P1bDe0bT3rNeso7fve/Y8vXWvPstR39D6C9Z1m08CWeasT3KOfV4t/Y7K2p67V3Osu7b9B+w1PqH18Bms7zV9Oshv1g6wGgU+fWDdM0+9mY60X7X9wN6Xv/cMeZ7pPzCHp8wXbM0BvX5G66P2v9TzTPeKOfQ864KWeU96A6zO9O/vIetU797+mSfY96wD2h80Uf/L9XmO/g96/96mHeL3LOnO8wXWIdM/aBfM15vPZ9v6O9P7e5M8pXw866Zof8fWvTjX0+0Bf7W8Y6wL9j1ruX8K/VvE63vSPfL6VjGfZ+p/X8c9eZ/xHvF+3mN9f0X6AetM92L2fE6fUqR9M7/fMfT8fK6n3eKOPK9oY6f+Z6yH7Of7fMb0EetZ7W/m6H9X59pIv2eP9Yf9/SnpB6wLpnXGvXgE8r8+g97vWbfe35He71nX9XmO/nd1Xg7X87b9Xes2+3Y610b6PXtO90/578f79fVpU65L9u10ro36PfvU+0v/U8p93XNtsG+nc23U79mn3l/yn2v78vM2P6Xsc9YvWJ6eUu4N9u10ro36PfvU+0v++6Ltt7U9pXxc0/893i/yB/Zt9pTykfXf57pI6S/UffH7gP5m/b9B3UfXP0bXP0bXP0bXP0bXP+SgfgMv77bNAnv0LAAAAABJRU5ErkJggg==" alt="AZKA STEPNOSING">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAYAAACkqwNfAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAACZ0lEQVR42u2av0vDQByG36Gl9C9wEAdxcXBycXByEAdxcXBy7uLg4ODkYAd3B+fg5ODk4NxFcHBwcXBy7mKof0OLeI9bSpsmTe9y6SXeBy8pSXOvzzvXpE0bW/bYlGPDuS9btoM166bcoiz2LDPfX9Z71hNWm7Wb8wXW+fK60NbeM97Yf9a1+T9v6Y7O6r66pB2771Y7BZZN6/9ivbE697G9wXonX0fWZ9b9bHshwI6s01rXAbaswMcXrOfSdVpLh7Yf0vuR5471RvtPzEGs6VvWIdf/m3Wwsh+ZfdfW9wO99XvvFev1gP6POfZc93uW2yX7PZ9AnfneZ53w87T/Z+9P7T3Te5/n9vX3Of7Yf9bXvI+895GfT/x64fU+83OfwX3Kz0veZ9v9O9f7I893+R7z9X/M/9vL/5f9nPWe78XufZ8Fp9b6Z/Y+x/p87KTZ8wPOw6w38nv8vX339VwZfW871676Pe/M9xf/fcn3OdtTntvZGvX33E+/uI9L6yvUfXf9E7b+ibpftv6Jul+2/om6f7Z98+mHT/8f7bZNA/uynXfbdLAO2/m4SdvfP3L9w369bNfndG4v22+ncz3U73mX3l/mnyvbn29uXNnXmPUPntsv8m7fF7ZzO+92XWPrn9h76L1v7L07vI+053rX7p8Kfe86t++XvE8F+679vT7fV6ZPr/bL7NvpXB/1e96l95f590XbL7VzPdfe8O9fcl/vDezb6Vwf9XvepfdX9pZ6bcl+yv7uOrenfN9e/8b9RfYw+3bE/f6L6B/g/uL/EfZf+H7i/gHev4f7d0E6iF/M8V40O66CkgAAAABJRU5ErkJggg==" alt="AZKA STEPNOSING">
                             <div class="slogan-text">
                                 HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
@@ -274,7 +274,7 @@
 
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi</div>
+            <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi (Cloud Firebase)</div>
             <div class="history-list" id="history-render-box"></div>
         </div>
     </div>
@@ -291,12 +291,32 @@
         </div>
     </div>
 
-<script>
-    let dynamicItems = [{ name: '', qty: '', price: '' }];
-    let storeInfo = { alamat: "Desa Takuti RT. 02,", kec: "Kec. Mataraman, Kab. Banjar", wa: "0857-5317-6046 | 0816-4978-1767" };
-    let savedInvoices = [];
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    function adjustNotaScale() {
+    // 🛠️ PASTE KODE KONFIGURASI FIREBASE ANDA DI SINI 🛠️
+    const firebaseConfig = {
+        apiKey: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        authDomain: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        databaseURL: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        projectId: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        storageBucket: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        messagingSenderId: "KODE_KONFIGURASI_FIREBASE_ANDA",
+        appId: "KODE_KONFIGURASI_FIREBASE_ANDA"
+    };
+
+    // Inisialisasi Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Variabel Global Sistem internal
+    window.dynamicItems = [{ name: '', qty: '', price: '' }];
+    window.storeInfo = { alamat: "Desa Takuti RT. 02,", kec: "Kec. Mataraman, Kab. Banjar", wa: "0857-5317-6046 | 0816-4978-1767" };
+    window.savedInvoices = [];
+
+    // Fungsi Scale Responsif HP
+    window.adjustNotaScale = function() {
         const wrapper = document.getElementById('preview-outer-wrapper');
         const scaleBox = document.getElementById('nota-scale-box');
         if (!wrapper || !scaleBox) return;
@@ -314,69 +334,90 @@
         }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('azka_store_info')) storeInfo = JSON.parse(localStorage.getItem('azka_store_info'));
-        if (localStorage.getItem('azka_saved_invoices')) savedInvoices = JSON.parse(localStorage.getItem('azka_saved_invoices'));
+    // Ambil Data Riwayat dari Firebase Realtime Database
+    function listenToFirebaseData() {
+        const invoicesRef = ref(db, 'invoices');
+        onValue(invoicesRef, (snapshot) => {
+            const data = snapshot.val();
+            window.savedInvoices = [];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    window.savedInvoices.push({ firebaseKey: key, ...data[key] });
+                });
+                // Urutkan nota terbaru di paling atas
+                window.savedInvoices.sort((a, b) => b.timestamp - a.timestamp);
+            }
+            if(document.getElementById('window-riwayat').classList.contains('view-hidden') === false) {
+                window.renderHistoryTab();
+            }
+        });
+    }
 
-        document.getElementById('cfg-alamat').value = storeInfo.alamat;
-        document.getElementById('cfg-kec').value = storeInfo.kec;
-        document.getElementById('cfg-wa').value = storeInfo.wa;
+    window.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('azka_store_info')) window.storeInfo = JSON.parse(localStorage.getItem('azka_store_info'));
+
+        document.getElementById('cfg-alamat').value = window.storeInfo.alamat;
+        document.getElementById('cfg-kec').value = window.storeInfo.kec;
+        document.getElementById('cfg-wa').value = window.storeInfo.wa;
 
         const tgl = new Date();
         document.getElementById('form-tanggal').value = tgl.getDate() + ' ' + tgl.toLocaleString('id-ID', { month: 'long' }) + ' ' + tgl.getFullYear();
 
-        applyStoreInfoToPaper();
-        bindFormSyncs();
-        renderInputFields();
-        liveRenderCalculations();
+        window.applyStoreInfoToPaper();
+        window.bindFormSyncs();
+        window.renderInputFields();
+        window.liveRenderCalculations();
         
-        adjustNotaScale();
-        window.addEventListener('resize', adjustNotaScale);
+        window.adjustNotaScale();
+        window.addEventListener('resize', window.adjustNotaScale);
+
+        // Aktifkan sinkronisasi Cloud Firebase
+        listenToFirebaseData();
     });
 
-    function bindFormSyncs() {
+    window.bindFormSyncs = function() {
         document.getElementById('form-tanggal').addEventListener('input', (e) => document.getElementById('lbl-nota-tanggal').innerText = e.target.value);
         document.getElementById('form-nama').addEventListener('input', (e) => document.getElementById('lbl-nota-nama').innerText = e.target.value);
         document.getElementById('form-telp').addEventListener('input', (e) => document.getElementById('lbl-nota-telp').innerText = e.target.value);
     }
 
-    function applyStoreInfoToPaper() {
-        document.getElementById('lbl-toko-alamat').innerText = storeInfo.alamat;
-        document.getElementById('lbl-toko-kec').innerText = storeInfo.kec;
-        document.getElementById('lbl-toko-wa').innerText = storeInfo.wa;
+    window.applyStoreInfoToPaper = function() {
+        document.getElementById('lbl-toko-alamat').innerText = window.storeInfo.alamat;
+        document.getElementById('lbl-toko-kec').innerText = window.storeInfo.kec;
+        document.getElementById('lbl-toko-wa').innerText = window.storeInfo.wa;
     }
 
-    function saveStoreConfiguration() {
-        storeInfo.alamat = document.getElementById('cfg-alamat').value;
-        storeInfo.kec = document.getElementById('cfg-kec').value;
-        storeInfo.wa = document.getElementById('cfg-wa').value;
-        localStorage.setItem('azka_store_info', JSON.stringify(storeInfo));
-        applyStoreInfoToPaper();
+    window.saveStoreConfiguration = function() {
+        window.storeInfo.alamat = document.getElementById('cfg-alamat').value;
+        window.storeInfo.kec = document.getElementById('cfg-kec').value;
+        window.storeInfo.wa = document.getElementById('cfg-wa').value;
+        localStorage.setItem('azka_store_info', JSON.stringify(window.storeInfo));
+        window.applyStoreInfoToPaper();
         alert('Profil Toko Diperbarui!');
-        switchTab('buat');
+        window.switchTab('buat');
     }
 
-    function switchTab(target) {
+    window.switchTab = function(target) {
         document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
         document.getElementById('tab-' + target).classList.add('active');
         document.getElementById('window-buat').classList.add('view-hidden');
         document.getElementById('window-riwayat').classList.add('view-hidden');
         document.getElementById('window-toko').classList.add('view-hidden');
         document.getElementById('window-' + target).classList.remove('view-hidden');
-        if(target === 'buat') setTimeout(adjustNotaScale, 50);
-        if(target === 'riwayat') renderHistoryTab();
+        if(target === 'buat') setTimeout(window.adjustNotaScale, 50);
+        if(target === 'riwayat') window.renderHistoryTab();
     }
 
-    function renderInputFields() {
+    window.renderInputFields = function() {
         const box = document.getElementById('dynamic-inputs-container');
         box.innerHTML = '';
-        dynamicItems.forEach((item, idx) => {
+        window.dynamicItems.forEach((item, idx) => {
             const block = document.createElement('div');
             block.className = 'item-card-input';
             block.innerHTML = `
                 <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
                     <span style="font-size:11px; font-weight:700; color:var(--primary-color);">Barang #${idx+1}</span>
-                    ${dynamicItems.length > 1 ? `<button class="btn btn-danger btn-sm" onclick="removeItemField(${idx})" style="padding:2px 6px;">Hapus</button>` : ''}
+                    ${window.dynamicItems.length > 1 ? `<button class="btn btn-danger btn-sm" onclick="removeItemField(${idx})" style="padding:2px 6px;">Hapus</button>` : ''}
                 </div>
                 <input type="text" placeholder="Nama Barang" value="${item.name}" oninput="changeItemValue(${idx}, 'name', this.value)" style="width:100%; padding:6px; margin-bottom:6px; border:1px solid var(--border-color); border-radius:4px; font-size:13px;">
                 <div style="display:grid; grid-template-columns: 1fr 2fr; gap:6px;">
@@ -388,12 +429,12 @@
         });
     }
 
-    function addNewItemField() { dynamicItems.push({ name: '', qty: '', price: '' }); renderInputFields(); liveRenderCalculations(); }
-    function removeItemField(idx) { dynamicItems.splice(idx, 1); renderInputFields(); liveRenderCalculations(); }
-    function changeItemValue(idx, field, value) { dynamicItems[idx][field] = value; liveRenderCalculations(); }
-    function moneyFormatter(num) { return (!num || isNaN(num)) ? '0' : parseFloat(num).toLocaleString('id-ID'); }
+    window.addNewItemField = function() { window.dynamicItems.push({ name: '', qty: '', price: '' }); window.renderInputFields(); window.liveRenderCalculations(); }
+    window.removeItemField = function(idx) { window.dynamicItems.splice(idx, 1); window.renderInputFields(); window.liveRenderCalculations(); }
+    window.changeItemValue = function(idx, field, value) { window.dynamicItems[idx][field] = value; window.liveRenderCalculations(); }
+    window.moneyFormatter = function(num) { return (!num || isNaN(num)) ? '0' : parseFloat(num).toLocaleString('id-ID'); }
 
-    function liveRenderCalculations() {
+    window.liveRenderCalculations = function() {
         document.getElementById('lbl-nota-tanggal').innerText = document.getElementById('form-tanggal').value;
         document.getElementById('lbl-nota-nama').innerText = document.getElementById('form-nama').value;
         document.getElementById('lbl-nota-telp').innerText = document.getElementById('form-telp').value;
@@ -402,7 +443,7 @@
         tbody.innerHTML = '';
         let subtotal = 0;
 
-        dynamicItems.forEach(item => {
+        window.dynamicItems.forEach(item => {
             const q = parseFloat(item.qty) || 0;
             const p = parseFloat(item.price) || 0;
             const totalBarang = q * p;
@@ -412,15 +453,15 @@
             tr.innerHTML = `
                 <td class="text-center">${item.qty !== '' ? item.qty : ''}</td>
                 <td>${item.name}</td>
-                <td class="text-right">${p > 0 ? moneyFormatter(p) : ''}</td>
-                <td class="text-right">${totalBarang > 0 ? moneyFormatter(totalBarang) : ''}</td>
+                <td class="text-right">${p > 0 ? window.moneyFormatter(p) : ''}</td>
+                <td class="text-right">${totalBarang > 0 ? window.moneyFormatter(totalBarang) : ''}</td>
             `;
             tbody.appendChild(tr);
         });
 
         const minLines = 8;
-        if(dynamicItems.length < minLines) {
-            for(let i = dynamicItems.length; i < minLines; i++) {
+        if(window.dynamicItems.length < minLines) {
+            for(let i = window.dynamicItems.length; i < minLines; i++) {
                 const dummyTr = document.createElement('tr');
                 dummyTr.innerHTML = `<td></td><td></td><td></td><td></td>`;
                 tbody.appendChild(dummyTr);
@@ -428,26 +469,33 @@
         }
 
         const dpValue = parseFloat(document.getElementById('form-dp').value) || 0;
-        document.getElementById('lbl-total-jumlah').innerText = moneyFormatter(subtotal);
-        document.getElementById('lbl-total-dp').innerText = moneyFormatter(dpValue);
-        document.getElementById('lbl-total-sisa').innerText = moneyFormatter(subtotal - dpValue);
+        document.getElementById('lbl-total-jumlah').innerText = window.moneyFormatter(subtotal);
+        document.getElementById('lbl-total-dp').innerText = window.moneyFormatter(dpValue);
+        document.getElementById('lbl-total-sisa').innerText = window.moneyFormatter(subtotal - dpValue);
     }
 
-    function generateAndSaveNota() {
+    window.generateAndSaveNota = function() {
         const namaPlg = document.getElementById('form-nama').value.trim();
         if(!namaPlg) { alert('Mohon isi Nama Pelanggan!'); return; }
 
         let totalSmt = 0;
-        dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
+        window.dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
         
-        savedInvoices.unshift({
-            id: 'INV-' + Date.now(), tanggal: document.getElementById('form-tanggal').value,
-            nama: namaPlg, telp: document.getElementById('form-telp').value,
-            items: [...dynamicItems], total: totalSmt, dp: parseFloat(document.getElementById('form-dp').value) || 0,
-            sisa: totalSmt - (parseFloat(document.getElementById('form-dp').value) || 0)
+        // Push Data Baru ke Cloud Firebase Database
+        const invoicesListRef = ref(db, 'invoices');
+        const newInvoiceRef = push(invoicesListRef);
+        set(newInvoiceRef, {
+            tanggal: document.getElementById('form-tanggal').value,
+            nama: namaPlg,
+            telp: document.getElementById('form-telp').value,
+            items: [...window.dynamicItems],
+            total: totalSmt,
+            dp: parseFloat(document.getElementById('form-dp').value) || 0,
+            sisa: totalSmt - (parseFloat(document.getElementById('form-dp').value) || 0),
+            timestamp: Date.now()
         });
-        localStorage.setItem('azka_saved_invoices', JSON.stringify(savedInvoices));
 
+        // Alur Cetak PDF Struktur Baku
         const navbar = document.getElementById('main-navbar');
         const sidebar = document.getElementById('input-sidebar-card');
         const wrapper = document.getElementById('preview-outer-wrapper');
@@ -474,47 +522,48 @@
             sidebar.style.display = 'block';
             wrapper.style.padding = '15px';
             wrapper.style.background = '#475569';
-            adjustNotaScale();
+            window.adjustNotaScale();
         });
     }
 
-    function deleteHistoryItem(id) {
-        if(confirm('Hapus nota ini dari riwayat?')) {
-            savedInvoices = savedInvoices.filter(inv => inv.id !== id);
-            localStorage.setItem('azka_saved_invoices', JSON.stringify(savedInvoices));
-            renderHistoryTab();
+    window.deleteHistoryItem = function(firebaseKey) {
+        if(confirm('Hapus nota ini dari riwayat Cloud?')) {
+            const itemRef = ref(db, 'invoices/' + firebaseKey);
+            remove(itemRef).then(() => {
+                window.renderHistoryTab();
+            });
         }
     }
 
-    function loadInvoiceToForm(id) {
-        const target = savedInvoices.find(inv => inv.id === id);
+    window.loadInvoiceToForm = function(firebaseKey) {
+        const target = window.savedInvoices.find(inv => inv.firebaseKey === firebaseKey);
         if(target) {
             document.getElementById('form-tanggal').value = target.tanggal;
             document.getElementById('form-nama').value = target.nama;
             document.getElementById('form-telp').value = target.telp;
             document.getElementById('form-dp').value = target.dp;
-            dynamicItems = [...target.items];
-            renderInputFields();
-            liveRenderCalculations();
-            switchTab('buat');
+            window.dynamicItems = [...target.items];
+            window.renderInputFields();
+            window.liveRenderCalculations();
+            window.switchTab('buat');
         }
     }
 
-    function renderHistoryTab() {
+    window.renderHistoryTab = function() {
         const box = document.getElementById('history-render-box');
-        if(savedInvoices.length === 0) { box.innerHTML = `<div style="text-align:center; padding:20px; font-size:13px;">Belum ada nota.</div>`; return; }
+        if(window.savedInvoices.length === 0) { box.innerHTML = `<div style="text-align:center; padding:20px; font-size:13px;">Belum ada nota tersimpan di Cloud Firebase.</div>`; return; }
         box.innerHTML = '';
-        savedInvoices.forEach(inv => {
+        window.savedInvoices.forEach(inv => {
             const div = document.createElement('div');
             div.className = 'history-item';
             div.innerHTML = `
                 <div>
                     <div style="font-weight:700; font-size:14px;">${inv.nama}</div>
-                    <div style="font-size:11px; color:#64748b;">${inv.tanggal} &nbsp;|&nbsp; Sisa: Rp ${moneyFormatter(inv.sisa)}</div>
+                    <div style="font-size:11px; color:#64748b;">${inv.tanggal} &nbsp;|&nbsp; Sisa: Rp ${window.moneyFormatter(inv.sisa)}</div>
                 </div>
                 <div style="display:flex; gap:6px;">
-                    <button class="btn btn-primary btn-sm" onclick="loadInvoiceToForm('${inv.id}')">Buka</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteHistoryItem('${inv.id}')"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-primary btn-sm" onclick="loadInvoiceToForm('${inv.firebaseKey}')">Buka</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteHistoryItem('${inv.firebaseKey}')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `;
             box.appendChild(div);
