@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
+    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA) -->
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
     <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiCn0=">
 
+    <!-- Library Pendukung (Cetak PDF & Ikon) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -102,11 +104,10 @@
             margin-bottom: 12px;
         }
 
-        /* Kolom 1: Desain Logo Vektor */
+        /* Kolom 1: Kontainer Logo dari File logo.png */
         .header-left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .logo-text-main { font-size: 23px; font-weight: 900; letter-spacing: 0.5px; color: #000000; line-height: 1; text-align: center; }
-        .logo-text-sub { font-size: 8px; font-weight: 800; border-top: 1.5px solid #000000; padding-top: 3px; margin-top: 4px; letter-spacing: 0.8px; text-align: center; color: #000000; width: 100%; }
-        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 9px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; border-top: 1px dashed #000000; padding-top: 4px; }
+        .logo-img { width: 190px; height: auto; object-fit: contain; display: block; margin-bottom: 2px; }
+        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; border-top: 1px dashed #000000; padding-top: 4px; }
 
         /* Kolom 2: Info Layanan Komplit */
         .header-center { padding-left: 25px; font-size: 12.5px; line-height: 1.45; color: #000000; }
@@ -144,6 +145,7 @@
 </head>
 <body>
 
+    <!-- Bar Navigasi Sistem -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-cloud"></i>
@@ -156,8 +158,10 @@
         </div>
     </div>
 
+    <!-- Main Kontainer Dashboard (Pembuatan Nota) -->
     <div class="dashboard-container" id="window-buat">
         
+        <!-- Input Area Form Transaksi (Sisi Kiri) -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> Input Data Transaksi</div>
             <div class="form-grid">
@@ -190,14 +194,16 @@
             </div>
         </div>
 
+        <!-- Live Preview Area Kertas Real-time (Sisi Kanan) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-scale-container" id="nota-scale-box">
                 <div class="nota-paper" id="actual-pdf-paper">
                     
+                    <!-- Konstruksi Atas Nota Sejajar -->
                     <div class="nota-header-grid">
                         <div class="header-left">
-                            <div class="logo-text-main">AZKA</div>
-                            <div class="logo-text-sub">STEPNOSING</div>
+                            <!-- REFERENSI LOGO GAMBAR ASLI -->
+                            <img src="logo.png" alt="Azka Stepnosing" class="logo-img">
                             <div class="slogan-text">
                                 HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
@@ -229,6 +235,7 @@
                         </div>
                     </div>
 
+                    <!-- Tabel Isi Item Transaksi -->
                     <table class="nota-table">
                         <thead>
                             <tr>
@@ -241,6 +248,7 @@
                         <tbody id="lbl-nota-rows"></tbody>
                     </table>
 
+                    <!-- Struktur Bagian Tanda Tangan & Perhitungan Finansial -->
                     <div class="nota-footer-grid">
                         <div class="footer-left-info">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
@@ -273,6 +281,7 @@
 
     </div>
 
+    <!-- Riwayat Transaksi Panel Cloud -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi (Cloud Firebase)</div>
@@ -280,6 +289,7 @@
         </div>
     </div>
 
+    <!-- Profil Toko (Ubah Info Nota via Web) -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Konfigurasi Toko</div>
@@ -292,6 +302,7 @@
         </div>
     </div>
 
+<!-- Modul Core SDK Firebase CDN v9 -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
