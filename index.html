@@ -100,15 +100,14 @@
         .nota-header-grid {
             display: grid;
             grid-template-columns: 240px 1fr 340px;
-            align-items: start;
+            align-items: center;
             margin-bottom: 12px;
         }
 
-        /* Kolom 1: Kontainer Logo dari File logo.png */
+        /* Kolom 1: Kontainer Logo Menggunakan file logo.png */
         .header-left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .logo-img { width: 190px; height: auto; object-fit: contain; display: block; margin-bottom: 2px; }
-        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; border-top: 1px dashed #000000; padding-top: 4px; }
-
+        .logo-img { width: 220px; height: auto; object-fit: contain; display: block; }
+        
         /* Kolom 2: Info Layanan Komplit */
         .header-center { padding-left: 25px; font-size: 12.5px; line-height: 1.45; color: #000000; }
         .header-center .headline { font-weight: bold; margin-bottom: 1px; }
@@ -120,7 +119,7 @@
         .meta-cln { width: 15px; text-align: center; font-weight: bold; }
         .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 18px; padding-left: 4px; }
 
-        /* Tabel Transaksi Barang kaku */
+        /* Tabel Transaksi Barang */
         .nota-table { width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed; }
         .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 6px; font-weight: bold; font-size: 12.5px; text-align: center; color: #000000; }
         .nota-table td { border: 1px solid #000000; padding: 4px 8px; height: 28px; font-size: 13px; vertical-align: middle; color: #000000; }
@@ -129,7 +128,7 @@
         .text-right { text-align: right; }
 
         /* Footer Nota Struktur Bawah */
-        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 12px; align-items: start; color: #000000; }
+        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 15px; align-items: start; color: #000000; }
         .footer-left-info { font-style: italic; font-size: 11.5px; line-height: 1.4; padding-top: 4px; }
         .footer-mid-sign { text-align: center; font-size: 13.5px; padding-top: 4px; }
         
@@ -202,11 +201,8 @@
                     <!-- Konstruksi Atas Nota Sejajar -->
                     <div class="nota-header-grid">
                         <div class="header-left">
-                            <!-- REFERENSI LOGO GAMBAR ASLI -->
-                            <img src="logo.png" alt="Azka Stepnosing" class="logo-img">
-                            <div class="slogan-text">
-                                HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
-                            </div>
+                            <!-- Pemanggilan File Gambar Logo Utama -->
+                            <img src="logo.png" alt="AZKA STEPNOSING" class="logo-img">
                         </div>
                         <div class="header-center">
                             <div class="headline">Melayani Penjualan :</div>
@@ -289,7 +285,7 @@
         </div>
     </div>
 
-    <!-- Profil Toko (Ubah Info Nota via Web) -->
+    <!-- Profil Toko -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Konfigurasi Toko</div>
@@ -307,7 +303,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    // Konfigurasi Kunci Proyek Firebase salesmon-martapura Anda
+    // Konfigurasi Kunci Proyek Firebase salesmon-martapura
     const firebaseConfig = {
         apiKey: "AIzaSyBKetgujoiZ0ko7G8F9ZCuz2PGRvT1fkk8",
         authDomain: "salesmon-martapura.firebaseapp.com",
@@ -328,7 +324,7 @@
     window.storeInfo = { alamat: "Desa Takuti RT. 02,", kec: "Kec. Mataraman, Kab. Banjar", wa: "0857-5317-6046 | 0816-4978-1767" };
     window.savedInvoices = [];
 
-    // Fungsi Pengatur Skala Layar HP agar Preview pas & presisi
+    // Fungsi Pengatur Skala Layar HP
     window.adjustNotaScale = function() {
         const wrapper = document.getElementById('preview-outer-wrapper');
         const scaleBox = document.getElementById('nota-scale-box');
@@ -347,7 +343,6 @@
         }
     }
 
-    // Pemantau Perubahan Data Realtime Cloud Firebase
     function listenToFirebaseData() {
         const invoicesRef = ref(db, 'invoices');
         onValue(invoicesRef, (snapshot) => {
@@ -492,7 +487,6 @@
         let totalSmt = 0;
         window.dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
         
-        // Simpan Data Ke Cloud Realtime Database Firebase Proyek salesmon-martapura
         const invoicesListRef = ref(db, 'invoices');
         const newInvoiceRef = push(invoicesListRef);
         set(newInvoiceRef, {
@@ -506,7 +500,6 @@
             timestamp: Date.now()
         });
 
-        // Trigger Ekspor Kertas PDF Berkualitas Tinggi Semu Landscape
         const navbar = document.getElementById('main-navbar');
         const sidebar = document.getElementById('input-sidebar-card');
         const wrapper = document.getElementById('preview-outer-wrapper');
