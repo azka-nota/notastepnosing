@@ -99,7 +99,7 @@
             display: grid;
             grid-template-columns: 240px 1fr 340px;
             align-items: center;
-            margin-bottom: 4px; /* Lebih mepet ke atas */
+            margin-bottom: 4px;
         }
 
         /* Kolom 1: Kontainer Logo */
@@ -117,7 +117,7 @@
         .meta-cln { width: 15px; text-align: center; font-weight: bold; }
         .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 15px; padding-left: 4px; }
 
-        /* Tabel Transaksi Barang (Sangat Rapat & Aman untuk 8 Baris) */
+        /* Tabel Transaksi Barang */
         .nota-table { width: 100%; border-collapse: collapse; margin: 4px 0; table-layout: fixed; }
         .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 4px; font-weight: bold; font-size: 12px; text-align: center; color: #000000; }
         .nota-table td { border: 1px solid #000000; padding: 2px 8px; height: 20px; font-size: 12.5px; vertical-align: middle; color: #000000; }
@@ -125,7 +125,7 @@
         .text-center { text-align: center; }
         .text-right { text-align: right; }
 
-        /* Footer Nota Struktur Bawah (Dinaikkan agar tidak melorot) */
+        /* Footer Nota Struktur Bawah */
         .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 5px; align-items: start; color: #000000; }
         .footer-left-info { font-style: italic; font-size: 11px; line-height: 1.35; padding-top: 2px; }
         .footer-mid-sign { text-align: center; font-size: 13px; padding-top: 2px; }
@@ -185,6 +185,8 @@
                 </div>
 
                 <button class="btn btn-success" style="margin-top: 5px;" onclick="generateAndSaveNota()"><i class="fa-solid fa-floppy-disk"></i> SIMPAN & CETAK PDF</button>
+                
+                <button id="pwa-install-btn" class="btn btn-primary view-hidden" style="margin-top: 8px; background: #475569;"><i class="fa-solid fa-download"></i> PASANG APLIKASI DI HP</button>
             </div>
         </div>
 
@@ -556,5 +558,37 @@
     }
 </script>
 
+<script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('pwa-install-btn');
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(() => {
+            console.log('Aplikasi Sistem Terdaftar Aman!');
+        });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.classList.remove('view-hidden');
+    });
+
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                installBtn.classList.add('view-hidden');
+            }
+            deferredPrompt = null;
+        }
+    });
+
+    window.addEventListener('appinstalled', () => {
+        installBtn.classList.add('view-hidden');
+        console.log('Aplikasi Azka Nota Sukses Terpasang di Home Screen!');
+    });
+</script>
 </body>
 </html>
