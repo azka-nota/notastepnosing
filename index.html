@@ -9,7 +9,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiLAogICpndWlkZSI6ICJub25lIgp9">
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiCn0=">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -103,38 +103,43 @@
             margin-bottom: 12px;
         }
 
-        /* Kolom 1: Logo & Slogan */
+        /* Kolom 1: Logo Embedded Base64 & Slogan */
         .header-left { display: flex; flex-direction: column; align-items: center; }
-        .header-left img { width: 100%; max-width: 210px; display: block; }
-        .slogan-text { font-size: 8px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; }
+        .header-left img { width: 100%; max-width: 210px; display: block; filter: brightness(0); }
+        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; }
 
         /* Kolom 2: Info Bisnis / Detail Layanan */
-        .header-center { padding-left: 20px; font-size: 12px; line-height: 1.4; color: #000; }
+        .header-center { padding-left: 20px; font-size: 12.5px; line-height: 1.45; color: #000000; }
         .header-center .headline { font-weight: bold; margin-bottom: 1px; }
 
         /* Kolom 3: Identitas Pembeli */
-        .header-right { display: flex; flex-direction: column; gap: 4px; padding-left: 20px; }
-        .meta-row { display: flex; font-size: 13px; align-items: flex-end; }
-        .meta-lbl { width: 65px; font-weight: normal; }
-        .meta-cln { width: 15px; text-align: center; }
-        .meta-val { flex-grow: 1; border-bottom: 1px dotted #000; font-weight: bold; min-height: 18px; padding-left: 2px; }
+        .header-right { display: flex; flex-direction: column; gap: 6px; padding-left: 20px; color: #000000; }
+        .meta-row { display: flex; font-size: 13.5px; align-items: flex-end; }
+        .meta-lbl { width: 65px; font-weight: bold; }
+        .meta-cln { width: 15px; text-align: center; font-weight: bold; }
+        .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 18px; padding-left: 4px; }
 
         /* TABEL TRANSAKSI BARANG */
         .nota-table { width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed; }
-        .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 5px; font-weight: bold; font-size: 12px; text-align: center; }
-        .nota-table td { border: 1px solid #000000; padding: 4px 8px; height: 28px; font-size: 13px; vertical-align: middle; }
+        .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 6px; font-weight: bold; font-size: 12.5px; text-align: center; color: #000000; }
+        .nota-table td { border: 1px solid #000000; padding: 4px 8px; height: 28px; font-size: 13px; vertical-align: middle; color: #000000; }
+
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
 
         /* NOTA FOOTER STRUCTURE */
-        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 8px; align-items: start; }
-        .footer-left-info { font-style: italic; font-size: 11px; line-height: 1.4; padding-top: 4px; }
-        .footer-mid-sign { text-align: center; font-size: 13px; padding-top: 4px; }
+        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 12px; align-items: start; color: #000000; }
+        .footer-left-info { font-style: italic; font-size: 11.5px; line-height: 1.4; padding-top: 4px; }
+        .footer-mid-sign { text-align: center; font-size: 13.5px; padding-top: 4px; }
         
         /* Tabel Perhitungan Finansial Right Side */
         .footer-right-calc { width: 100%; border-collapse: collapse; }
-        .footer-right-calc td { border: 1px solid #000000; padding: 4px 8px; font-size: 12px; font-weight: bold; }
-        .lbl-calc-side { text-align: right; width: 45%; background: #ffffff; padding-right: 10px; }
+        .footer-right-calc td { border: 1px solid #000000; padding: 5px 8px; font-size: 13px; font-weight: bold; color: #000000; }
+        .lbl-calc-side { text-align: right; width: 45%; background: #ffffff; padding-right: 12px; }
 
         .view-hidden { display: none !important; }
+        .history-list { display: flex; flex-direction: column; gap: 10px; }
+        .history-item { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
@@ -191,8 +196,7 @@
                     
                     <div class="nota-header-grid">
                         <div class="header-left">
-                            <img src="logo.png" alt="AZKA STEPNOSING" onerror="this.style.display='none'; document.getElementById('alt-logo-txt').style.display='block';">
-                            <div id="alt-logo-txt" style="display:none; font-weight:800; font-size:16px; color:#000;">AZKA STEPNOSING</div>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAYAAACkqwNfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJTSURBVHgB7ZpBbtNAEIY/O8SChAtAnIDYs8AecgCOgAtAnIDYp8AeoByAG7An6Am6AnECYg8g9gK6gAun8XwzSbyu7bV3vGvH8XwS68S7s7v2b3bGG8vE0p8vPz5vEusN66mKdc+6z7rBesS6KbeCAnN4Gq5G739C7i2P1bDe0bT3rNeso7fve/Y8vXWvPstR39D6C9Z1m08CWeasT3KOfV4t/Y7K2p67V3Osu7b9B+w1PqH18Bms7zV9Oshv1g6wGgU+fWDdM0+9mY60X7X9wN6Xv/cMeZ7pPzCHp8wXbM0BvX5G66P2v9TzTPeKOfQ864KWeU96A6zO9O/vIetU797+mSfY96wD2h80Uf/L9XmO/g96/96mHeL3LOnO8wXWIdM/aBfM15vPZ9v6O9P7e5M8pXw866Zof8fWvTjX0+0Bf7W8Y6wL9j1ruX8K/VvE63vSPfL6VjGfZ+p/X8c9eZ/xHvF+3mN9f0X6AetM92L2fE6fUqR9M7/fMfT8fK6n3eKOPK9oY6f+Z6yH7Of7fMb0EetZ7W/m6H9X59pIv2eP9Yf9/SnpB6wLpnXGvXgE8r8+g97vWbfe35He71nX9XmO/nd1Xg7X87b9Xes2+3Y610b6PXtO90/578f79fVpU65L9u10ro36PfvU+0v/U8p93XNtsG+nc23U79mn3l/yn2v78vM2P6Xsc9YvWJ6eUu4N9u10ro36PfvU+0v++6Ltt7U9pXxc0/893i/yB/Zt9pTykfXf57pI6S/UffH7gP5m/b9B3UfXP0bXP0bXP0bXP0bXP+SgfgMv77bNAnv0LAAAAABJRU5ErkJggg==" alt="AZKA STEPNOSING">
                             <div class="slogan-text">
                                 HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
@@ -203,12 +207,12 @@
                             <div>Custom Potong Granit Dan Lain-lain.</div>
                             <div style="margin-top: 3px; font-weight: bold;" id="lbl-toko-alamat">Desa Takuti RT. 02,</div>
                             <div style="font-weight: bold;" id="lbl-toko-kec">Kec. Mataraman, Kab. Banjar</div>
-                            <div id="lbl-toko-wa">0857-5317-6046 | 0816-4978-1767</div>
+                            <div id="lbl-toko-wa" style="font-weight: bold;">0857-5317-6046 | 0816-4978-1767</div>
                         </div>
                         <div class="header-right">
                             <div class="meta-row">
                                 <div class="meta-lbl">Tanggal</div>
-                                <div class="meta-cln">:</div>
+                                <div class="meta-cln">,</div>
                                 <div class="meta-val" id="lbl-nota-tanggal"></div>
                             </div>
                             <div class="meta-row">
@@ -414,7 +418,6 @@
             tbody.appendChild(tr);
         });
 
-        // Selalu buat minimal 8 baris tabel sesuai gambar target asli Anda
         const minLines = 8;
         if(dynamicItems.length < minLines) {
             for(let i = dynamicItems.length; i < minLines; i++) {
