@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Aplikasi Nota AZKA STEPNOSING</title>
     
-    <!-- Pemicu Instalasi Aplikasi Mandiri (PWA) -->
     <meta name="theme-color" content="#0f172a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Azka Nota">
     <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkF6a2EgU3RlcG5vc2luZyBOb3RhIiwKICAic2hvcnRfbmFtZSI6ICJBemthIE5vdGEiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBmMTcyYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwZjE3MmEiCn0=">
 
-    <!-- Library Pendukung (Cetak PDF & Ikon) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -85,12 +83,12 @@
         }
         .nota-scale-container { width: 1000px; transform-origin: top left; }
 
-        /* KERTAS NOTA (Optimasi Tinggi Pas 560px Anti Terpotong) */
+        /* KERTAS NOTA (Optimasi Tinggi Pas 560px Dengan Padding Ketat Luar) */
         .nota-paper {
             width: 1000px;
             height: 560px;
             background: #ffffff;
-            padding: 20px 30px;
+            padding: 15px 30px;
             color: #000000;
             box-sizing: border-box;
             position: relative;
@@ -101,40 +99,40 @@
             display: grid;
             grid-template-columns: 240px 1fr 340px;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 4px; /* Lebih mepet ke atas */
         }
 
         /* Kolom 1: Kontainer Logo */
         .header-left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .logo-img { width: 200px; height: auto; object-fit: contain; display: block; }
+        .logo-img { width: 195px; height: auto; object-fit: contain; display: block; }
         
         /* Kolom 2: Info Layanan Komplit */
-        .header-center { padding-left: 25px; font-size: 12px; line-height: 1.4; color: #000000; }
+        .header-center { padding-left: 25px; font-size: 12px; line-height: 1.35; color: #000000; }
         .header-center .headline { font-weight: bold; margin-bottom: 1px; }
 
         /* Kolom 3: Info Pelanggan */
-        .header-right { display: flex; flex-direction: column; gap: 5px; padding-left: 20px; color: #000000; }
+        .header-right { display: flex; flex-direction: column; gap: 4px; padding-left: 20px; color: #000000; }
         .meta-row { display: flex; font-size: 13px; align-items: flex-end; }
         .meta-lbl { width: 65px; font-weight: bold; }
         .meta-cln { width: 15px; text-align: center; font-weight: bold; }
-        .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 16px; padding-left: 4px; }
+        .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 15px; padding-left: 4px; }
 
-        /* Tabel Transaksi Barang (Lebih Rapat & Padat) */
-        .nota-table { width: 100%; border-collapse: collapse; margin: 8px 0; table-layout: fixed; }
-        .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 5px; font-weight: bold; font-size: 12px; text-align: center; color: #000000; }
-        .nota-table td { border: 1px solid #000000; padding: 3px 8px; height: 24px; font-size: 12.5px; vertical-align: middle; color: #000000; }
+        /* Tabel Transaksi Barang (Sangat Rapat & Aman untuk 8 Baris) */
+        .nota-table { width: 100%; border-collapse: collapse; margin: 4px 0; table-layout: fixed; }
+        .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 4px; font-weight: bold; font-size: 12px; text-align: center; color: #000000; }
+        .nota-table td { border: 1px solid #000000; padding: 2px 8px; height: 20px; font-size: 12.5px; vertical-align: middle; color: #000000; }
 
         .text-center { text-align: center; }
         .text-right { text-align: right; }
 
-        /* Footer Nota Struktur Bawah (Dinaikkan sedikit jalurnya) */
-        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 10px; align-items: start; color: #000000; }
-        .footer-left-info { font-style: italic; font-size: 11px; line-height: 1.4; padding-top: 2px; }
+        /* Footer Nota Struktur Bawah (Dinaikkan agar tidak melorot) */
+        .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 5px; align-items: start; color: #000000; }
+        .footer-left-info { font-style: italic; font-size: 11px; line-height: 1.35; padding-top: 2px; }
         .footer-mid-sign { text-align: center; font-size: 13px; padding-top: 2px; }
         
         /* Tabel Finansial Kanan */
         .footer-right-calc { width: 100%; border-collapse: collapse; }
-        .footer-right-calc td { border: 1px solid #000000; padding: 4px 8px; font-size: 12.5px; font-weight: bold; color: #000000; }
+        .footer-right-calc td { border: 1px solid #000000; padding: 3px 8px; font-size: 12.5px; font-weight: bold; color: #000000; }
         .lbl-calc-side { text-align: right; width: 45%; background: #ffffff; padding-right: 12px; }
 
         .view-hidden { display: none !important; }
@@ -144,7 +142,6 @@
 </head>
 <body>
 
-    <!-- Bar Navigasi Sistem -->
     <div class="navbar" id="main-navbar">
         <div class="brand">
             <i class="fa-solid fa-cloud"></i>
@@ -157,10 +154,8 @@
         </div>
     </div>
 
-    <!-- Main Kontainer Dashboard (Pembuatan Nota) -->
     <div class="dashboard-container" id="window-buat">
         
-        <!-- Input Area Form Transaksi (Sisi Kiri) -->
         <div class="card" id="input-sidebar-card">
             <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> Input Data Transaksi</div>
             <div class="form-grid">
@@ -193,12 +188,10 @@
             </div>
         </div>
 
-        <!-- Live Preview Area Kertas Real-time (Sisi Kanan) -->
         <div class="preview-wrapper" id="preview-outer-wrapper">
             <div class="nota-scale-container" id="nota-scale-box">
                 <div class="nota-paper" id="actual-pdf-paper">
                     
-                    <!-- Konstruksi Atas Nota Sejajar -->
                     <div class="nota-header-grid">
                         <div class="header-left">
                             <img src="logo.png" alt="AZKA STEPNOSING" class="logo-img">
@@ -230,7 +223,6 @@
                         </div>
                     </div>
 
-                    <!-- Tabel Isi Item Transaksi -->
                     <table class="nota-table">
                         <thead>
                             <tr>
@@ -243,7 +235,6 @@
                         <tbody id="lbl-nota-rows"></tbody>
                     </table>
 
-                    <!-- Struktur Bagian Tanda Tangan & Perhitungan Finansial -->
                     <div class="nota-footer-grid">
                         <div class="footer-left-info">
                             Hubungi Kami Untuk Informasi dan<br>Pemesanan Selanjutnya
@@ -276,7 +267,6 @@
 
     </div>
 
-    <!-- Riwayat Transaksi Panel Cloud -->
     <div class="dashboard-container view-hidden" id="window-riwayat" style="grid-template-columns: 1fr;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Transaksi (Cloud Firebase)</div>
@@ -284,7 +274,6 @@
         </div>
     </div>
 
-    <!-- Profil Toko -->
     <div class="dashboard-container view-hidden" id="window-toko" style="grid-template-columns: 1fr; max-width: 500px;">
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-gears"></i> Konfigurasi Toko</div>
@@ -297,7 +286,6 @@
         </div>
     </div>
 
-<!-- Modul Core SDK Firebase CDN v9 -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
@@ -460,7 +448,6 @@
             tbody.appendChild(tr);
         });
 
-        // Set jumlah baris default menjadi 8 agar pas dengan tinggi kertas 560px
         const minLines = 8;
         if(window.dynamicItems.length < minLines) {
             for(let i = window.dynamicItems.length; i < minLines; i++) {
@@ -502,7 +489,6 @@
         const scaleBox = document.getElementById('nota-scale-box');
         const paper = document.getElementById('actual-pdf-paper');
 
-        // Reset Transformasi & Layout saat proses perekaman PDF berlangsung
         scaleBox.style.transform = 'none';
         navbar.style.display = 'none';
         sidebar.style.display = 'none';
@@ -519,7 +505,6 @@
         };
 
         html2pdf().set(pdfConfig).from(paper).save().then(() => {
-            // Kembalikan Layout Aplikasi ke tampilan Web semula
             navbar.style.display = 'flex';
             sidebar.style.display = 'block';
             wrapper.style.padding = '15px';
