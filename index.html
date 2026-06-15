@@ -62,7 +62,6 @@
         .form-group { display: flex; flex-direction: column; gap: 4px; }
         .form-group label { font-size: 12px; font-weight: 600; color: #475569; }
         .form-group input { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px; }
-        .form-group input:focus { border-color: var(--primary-color); outline: none; }
 
         .item-card-input { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; margin-bottom: 8px; }
         .btn { padding: 10px 14px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; }
@@ -71,7 +70,7 @@
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
 
-        /* LIVE PREVIEW WRAPPER DENGAN AUTO SCALING PAS DI LAYAR HP */
+        /* Preview Wrapper Responsif */
         .preview-wrapper {
             width: 100%;
             background: #475569;
@@ -84,7 +83,7 @@
         }
         .nota-scale-container { width: 1000px; transform-origin: top left; }
 
-        /* KERTAS NOTA - ADJUSTED 1000px x 560px */
+        /* KERTAS NOTA (Dimensi Presisi Gambar Asli 1000px x 560px) */
         .nota-paper {
             width: 1000px;
             height: 560px;
@@ -95,7 +94,7 @@
             position: relative;
         }
 
-        /* SUSUNAN HEADER 3 KOLOM SEJAJAR */
+        /* Tata Letak Header 3 Kolom Sejajar */
         .nota-header-grid {
             display: grid;
             grid-template-columns: 240px 1fr 340px;
@@ -103,23 +102,24 @@
             margin-bottom: 12px;
         }
 
-        /* Kolom 1: Logo & Slogan */
-        .header-left { display: flex; flex-direction: column; align-items: center; }
-        .header-left img { width: 100%; max-width: 210px; display: block; }
-        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 5px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; }
+        /* Kolom 1: Desain Logo Vektor */
+        .header-left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .logo-text-main { font-size: 23px; font-weight: 900; letter-spacing: 0.5px; color: #000000; line-height: 1; text-align: center; }
+        .logo-text-sub { font-size: 8px; font-weight: 800; border-top: 1.5px solid #000000; padding-top: 3px; margin-top: 4px; letter-spacing: 0.8px; text-align: center; color: #000000; width: 100%; }
+        .slogan-text { font-size: 8.5px; font-weight: bold; text-align: center; margin-top: 9px; line-height: 1.3; width: 100%; letter-spacing: -0.2px; color: #000000; border-top: 1px dashed #000000; padding-top: 4px; }
 
-        /* Kolom 2: Info Bisnis / Detail Layanan */
-        .header-center { padding-left: 20px; font-size: 12.5px; line-height: 1.45; color: #000000; }
+        /* Kolom 2: Info Layanan Komplit */
+        .header-center { padding-left: 25px; font-size: 12.5px; line-height: 1.45; color: #000000; }
         .header-center .headline { font-weight: bold; margin-bottom: 1px; }
 
-        /* Kolom 3: Identitas Pembeli */
+        /* Kolom 3: Info Pelanggan */
         .header-right { display: flex; flex-direction: column; gap: 6px; padding-left: 20px; color: #000000; }
         .meta-row { display: flex; font-size: 13.5px; align-items: flex-end; }
         .meta-lbl { width: 65px; font-weight: bold; }
         .meta-cln { width: 15px; text-align: center; font-weight: bold; }
         .meta-val { flex-grow: 1; border-bottom: 1px dotted #000000; font-weight: normal; min-height: 18px; padding-left: 4px; }
 
-        /* TABEL TRANSAKSI BARANG */
+        /* Tabel Transaksi Barang kaku */
         .nota-table { width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed; }
         .nota-table th { background: #e2e8f0; border: 1px solid #000000; padding: 6px; font-weight: bold; font-size: 12.5px; text-align: center; color: #000000; }
         .nota-table td { border: 1px solid #000000; padding: 4px 8px; height: 28px; font-size: 13px; vertical-align: middle; color: #000000; }
@@ -127,12 +127,12 @@
         .text-center { text-align: center; }
         .text-right { text-align: right; }
 
-        /* NOTA FOOTER STRUCTURE */
+        /* Footer Nota Struktur Bawah */
         .nota-footer-grid { display: grid; grid-template-columns: 38% 27% 35%; margin-top: 12px; align-items: start; color: #000000; }
         .footer-left-info { font-style: italic; font-size: 11.5px; line-height: 1.4; padding-top: 4px; }
         .footer-mid-sign { text-align: center; font-size: 13.5px; padding-top: 4px; }
         
-        /* Tabel Perhitungan Finansial Right Side */
+        /* Tabel Finansial Kanan */
         .footer-right-calc { width: 100%; border-collapse: collapse; }
         .footer-right-calc td { border: 1px solid #000000; padding: 5px 8px; font-size: 13px; font-weight: bold; color: #000000; }
         .lbl-calc-side { text-align: right; width: 45%; background: #ffffff; padding-right: 12px; }
@@ -196,7 +196,8 @@
                     
                     <div class="nota-header-grid">
                         <div class="header-left">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAA8CAMAAAAsYfNRAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABhWlDQ1NQQyBwcm9maWxlAABoInNVUUpMREUURfV9biuIiAgKijZii40YIpYoInYREbFwEbuIiNiIsYuIiCgiiqKiIgoqgogKInYREUVEERFRVBRFRERERMREbCLeY/ee9+bNfGfmzXv3zbyZ+b0DwDo6zXFpLAsA4AmG0+mhPh7uHp6eXpMAl96AABgQAAs8bGoYTuuJAID9/+XlnMvNInAmN9sZg7+C6S370M8KAPgY7vN6fAAeKQA+pA8LpAAU3gAecjFpSgB8VQC8TxsSywLghQJwiNfDAgB9D4DH7EOfKgDeLgCm/WwAYPsbANv9bABgDwDw0F9O9rcGgE8ZfD8D4KsAfFUA/MIAfH8B+LkBOD4AfwMAW2R4h9vNIdDTFezpGuDhFhLpGRDoE+DqFOgREODtGRDs6efp7Rfo7+Pl7unmERjiEebm4esZ6uXjHeLt4RsUHObr5ubtHejrFeDvGeDrERDoHeDr7unh7wX7pQEArAAI19Np+H66f9p+AnS6f/b/AQFzSms19K8NAAAAWlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMExdaAAAAH3RSTlMA9vD39e/p5M7Avbu5tLGoppmIbm1YVEpCPDAtKSYfC+WnRwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAW9JREFUaN7tl8lywjAMRAsmGZpAaAn//ysXp8SOTFvM6FzdR/uSpXpCki0XvSg226Gz7bofWpLIsgN67P6Dlu6mCfoG7pBw35P99AIn8gXv88L30YfcIUnu0XhG0p+RIs/IMD7N7/M/88rL/I0v70idX9M0uEaO9ZqBawT6D/T1GqZpPGOepvGMeVr6NYzX9XhWfE9fX+vI6Z7q6DWe6ujW95TXWwP3fE+r9L86MstInWck9VqB/gPNawT6S/u0vG8H69vBvL3tXNf9XMeR+bWOo/K1Y3n6ZpUv0+v9Znm9+qZpfZpsm9bV9/6p1/9/6m83+L/+3gH/v78H8P/7u/w//u7vGv/rF/7vX/jfvvA/f+F/+cL/vPDzF97XgZ9fep8XfvrC+zzw8+PnvC39/Dk/O8pZfXv9K6KctX8DlrP6/mP5v0fH9bNjlM9v7T8fRfnmC/r/X/Xz9+P6tYmH9vT/R/0u8bN/D/r/W/3bXgX9ZzK/v3P7W3fR9fVzXwDvewD/r/0Y/36O/z/Gv5/j34/x7+f492P8O8b/A3f2p/gXGf8O/v99pP/bH9vT/9X9H5S/YgH/Y96vWMA3N7Zndp/M8/67P8v3pfeCfv9v95e99/6N2Z/j/b8X5O839jZmL+j/+D/2f+z/2P+ZfaD/B6KPhK4KNDqAAAAAAElFTkSuQmCC" alt="AZKA STEPNOSING">
+                            <div class="logo-text-main">AZKA</div>
+                            <div class="logo-text-sub">STEPNOSING</div>
                             <div class="slogan-text">
                                 HARGA TERBAIK &nbsp;|&nbsp; HARGA KOMPETITIF &nbsp;|&nbsp; PELAYANAN TERPERCAYA
                             </div>
@@ -295,7 +296,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    // Data Konfigurasi Firebase Proyek salesmon-martapura Anda
+    // Konfigurasi Kunci Proyek Firebase salesmon-martapura Anda
     const firebaseConfig = {
         apiKey: "AIzaSyBKetgujoiZ0ko7G8F9ZCuz2PGRvT1fkk8",
         authDomain: "salesmon-martapura.firebaseapp.com",
@@ -307,16 +308,16 @@
         measurementId: "G-WV4FR95TS9"
     };
 
-    // Inisialisasi Firebase Database
+    // Inisialisasi Database
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Variabel Global
+    // Variabel Global Runtime
     window.dynamicItems = [{ name: '', qty: '', price: '' }];
     window.storeInfo = { alamat: "Desa Takuti RT. 02,", kec: "Kec. Mataraman, Kab. Banjar", wa: "0857-5317-6046 | 0816-4978-1767" };
     window.savedInvoices = [];
 
-    // Fungsi Scale Responsif HP
+    // Fungsi Pengatur Skala Layar HP agar Preview pas & presisi
     window.adjustNotaScale = function() {
         const wrapper = document.getElementById('preview-outer-wrapper');
         const scaleBox = document.getElementById('nota-scale-box');
@@ -335,7 +336,7 @@
         }
     }
 
-    // Mengambil dan mensinkronisasikan riwayat Cloud Firebase secara realtime lintas perangkat
+    // Pemantau Perubahan Data Realtime Cloud Firebase
     function listenToFirebaseData() {
         const invoicesRef = ref(db, 'invoices');
         onValue(invoicesRef, (snapshot) => {
@@ -347,7 +348,7 @@
                 });
                 window.savedInvoices.sort((a, b) => b.timestamp - a.timestamp);
             }
-            if(document.getElementById('window-riwayat').classList.contains('view-hidden') === false) {
+            if(!document.getElementById('window-riwayat').classList.contains('view-hidden')) {
                 window.renderHistoryTab();
             }
         });
@@ -480,7 +481,7 @@
         let totalSmt = 0;
         window.dynamicItems.forEach(i => { totalSmt += (parseFloat(i.qty)||0) * (parseFloat(i.price)||0); });
         
-        // Simpan ke Cloud Firebase
+        // Simpan Data Ke Cloud Realtime Database Firebase Proyek salesmon-martapura
         const invoicesListRef = ref(db, 'invoices');
         const newInvoiceRef = push(invoicesListRef);
         set(newInvoiceRef, {
@@ -494,7 +495,7 @@
             timestamp: Date.now()
         });
 
-        // Alur Ekspor Cetak PDF
+        // Trigger Ekspor Kertas PDF Berkualitas Tinggi Semu Landscape
         const navbar = document.getElementById('main-navbar');
         const sidebar = document.getElementById('input-sidebar-card');
         const wrapper = document.getElementById('preview-outer-wrapper');
@@ -528,9 +529,7 @@
     window.deleteHistoryItem = function(firebaseKey) {
         if(confirm('Hapus nota ini dari riwayat Cloud?')) {
             const itemRef = ref(db, 'invoices/' + firebaseKey);
-            remove(itemRef).then(() => {
-                window.renderHistoryTab();
-            });
+            remove(itemRef).then(() => { window.renderHistoryTab(); });
         }
     }
 
