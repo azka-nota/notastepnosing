@@ -1,0 +1,18 @@
+{
+  "name": "Azka Stepnosing Nota",
+  "short_name": "Azka Nota",
+  "description": "Sistem Aplikasi Nota Cloud Azka Stepnosing",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme-color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
